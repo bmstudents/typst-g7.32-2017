@@ -38,8 +38,6 @@
             pagebreak: true,
             weight:"bold",
             size: 14pt,
-            upper: true,
-            align: center,
             indent: 1em
         ),
         l2: (

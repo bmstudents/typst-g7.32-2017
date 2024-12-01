@@ -5,14 +5,9 @@
     [
         #set align(config.toc.align)
         #outline(
-            title: [
-                #set align(config.heading.l1.align)
-                #set text(config.heading.l1.size, weight: config.heading.l1.weight)
-                #config.toc.label
-            ],
             indent: auto,
         )
     ]
 }
 
-#let содержимое() = table_of_contents()
+#let содержание() = table_of_contents()

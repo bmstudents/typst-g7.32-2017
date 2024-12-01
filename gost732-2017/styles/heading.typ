@@ -1,5 +1,5 @@
 #import "../g7.32-2017.config.typ": config
-#import "../utils/utils.typ": to_str
+#import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading
 
 #let style_heading(content) = {
     // Счетчик для отсчета первого заголовка
@@ -7,15 +7,6 @@
     let heading_pagebreak = counter("heading_pagebreak")
 
     set heading(numbering: config.heading.numbering)
-
-    let should_be_unnumbered_heading(heading) = {
-        let heading = lower(to_str(heading))
-        let match_res = heading.match(regex(
-            "(список испольнителей)|реферат|содержание|(термины и определения)|(перечень сокращений и обозначений)|введение|заключение|(список использованных источников)|(приложение [а-яё])"
-        ))
-
-        return match_res != none and match_res.start == 0 and match_res.end == heading.len()
-    }
 
     let try_apply_number_subheading(subheading) = {
         if counter(heading).get().at(0) != 0 {
@@ -74,20 +65,15 @@
             not disable_numbering and
             not should_be_unnumbered_heading(it)
         ) { 
-            it = [#heading_number ] + it
+            it = [ #h(config.page.parIndent) #heading_number ] + it       
         } else {
-            // Сброс счетчика для корректного определения вида подзаголовков
+            it = upper()[ #align(center)[ #it ]]
+            // Сброс счетчика для корректного определения вида подзаголовков1
             counter(heading).update(0)
         }
 
-        if config.heading.l1.upper {
-            it = upper(it)
-        }
-
-        align(config.heading.l1.align)[
-            #par(spacing: config.heading.l1.indent)[
-                #it
-            ]
+        par(spacing: config.heading.l1.indent)[
+            #it
         ]
     }
 

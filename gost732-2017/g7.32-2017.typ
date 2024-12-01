@@ -6,6 +6,7 @@
     show: style_heading;
     show: style_list;
     show: style_raw;
+    show: style_toc;
     content
 }
 
