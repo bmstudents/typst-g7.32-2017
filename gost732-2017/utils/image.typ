@@ -5,6 +5,7 @@
     placement,
     content
 ) = {
+    content += [ #v(14pt) ]
     return figure(
         image,
         caption: content,
