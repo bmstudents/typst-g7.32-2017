@@ -1,3 +1,5 @@
+#let img-counter = counter("image");
+
 #let config = (
     raw:(
         theme:"",
@@ -12,7 +14,7 @@
         align: left
     ),
     img:(
-        counter: counter("image")
+        counter: img-counter
     ),
     table:(
         counter: counter("table")
@@ -23,10 +25,11 @@
         paper: "a4",
         margin: (left: 30mm, right: 15mm, top: 20mm, bottom: 20mm),
         font: "Times New Roman",
-        parIndent: 1.25cm
+        parIndent: 1.25cm,
+        spacing: 1em
     ),
     list: (
-        indent: 0.35em
+        indent: 1em
     ),
     heading: (
         numbering: "1.1",
@@ -65,4 +68,3 @@
         ),
     )
 )
-
