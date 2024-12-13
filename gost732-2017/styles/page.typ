@@ -34,21 +34,8 @@
         separator: [ --- ]
     )
 
-    // set figure
-
-    show ref: it => {
-        let el = it.element
-        if el != none and el.func() == figure {
-            // Не писать "Рисунок", а только номер
-            link(el.location(),numbering(
-            el.numbering,
-            ..counter(figure).at(el.location())
-            ))
-        } else {
-            it
-        }
-        
-    }
+    // Писать только номер у ссылок
+    set ref(supplement: it => [])
 
     content
 }
