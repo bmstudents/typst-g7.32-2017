@@ -2,13 +2,23 @@
 
 #let style_figure(content) = {
     show figure.where(
-      kind: table
+        kind: table
     ): it => {
-      set par(justify: false)
-      set figure.caption(position: top)
-      show figure.caption: set align(left)
+        // set par(justify: false)
+        set figure.caption(position: top)
+        show figure.caption: set align(left)
 
-      it
+        it
+    }
+
+    show figure.where(
+        kind: raw
+    ): it => {
+        set par(justify: false)
+        set figure.caption(position: top)
+        show figure.caption: set align(left)
+
+        it
     }
 
     show figure: it => {
@@ -18,7 +28,7 @@
         ]
     }
 
-    set table(inset: 10pt)
+    set table(inset: config.figure.inset)
 
     content
 }

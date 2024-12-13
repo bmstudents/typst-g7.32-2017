@@ -1,23 +1,16 @@
 #let img-counter = counter("image");
 
 #let config = (
+    figure:(
+        inset: 10pt,
+    ),
     raw:(
-        theme:"",
-        bg: luma(240),
-        num: false,
-        size: 14pt,
-        splitter: "|",
-        counter: counter("listing")
+        font: "Courier",
+        size: 12pt,
     ),
     toc:(
         label: "Содержание",
         align: left
-    ),
-    img:(
-        counter: img-counter
-    ),
-    table:(
-        counter: counter("table")
     ),
     page:(
         textSize: 14pt,
