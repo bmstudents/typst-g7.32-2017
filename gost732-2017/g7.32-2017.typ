@@ -7,6 +7,7 @@
     show: style_list;
     show: style_toc;
     show: style_figure;
+    show: style_raw;
     content
 }
 

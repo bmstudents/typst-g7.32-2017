@@ -5,9 +5,7 @@
         stroke: black, 
         inset: config.figure.inset, 
         width: 100%
-    )[ 
-        #set align(left)
-        #set text(font: config.raw.font, size: config.raw.size)
+    )[
         #data
     ]
 

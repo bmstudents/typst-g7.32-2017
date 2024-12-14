@@ -4,7 +4,7 @@
     show figure.where(
         kind: table
     ): it => {
-        // set par(justify: false)
+        set block(breakable: true)
         set figure.caption(position: top)
         show figure.caption: set align(left)
 
@@ -14,7 +14,6 @@
     show figure.where(
         kind: raw
     ): it => {
-        set par(justify: false)
         set figure.caption(position: top)
         show figure.caption: set align(left)
 
