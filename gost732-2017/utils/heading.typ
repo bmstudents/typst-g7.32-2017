@@ -24,6 +24,13 @@
 ]
 #let перечень_сокращений_и_ссылок = abbreviations_and_designations
 
+#let terms_abbreviations_designations(content) = [
+    = Определения, обозначения и сокращения
+    #set par(first-line-indent: 0em)
+    #content
+]
+#let определения_обозначения_сокращения = terms_abbreviations_designations
+
 #let introduction = [
     = Введение
 ]   
