@@ -34,7 +34,9 @@
         ]
     }
 
-    set table(inset: config.figure.inset)
+    set figure.caption(
+        separator: [ --- ]
+    )
 
     content
 }

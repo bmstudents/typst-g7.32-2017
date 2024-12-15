@@ -1,5 +1,3 @@
-#let img-counter = counter("image");
-
 #let config = (
     figure:(
         inset: 10pt,

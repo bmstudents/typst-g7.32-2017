@@ -30,10 +30,6 @@
         justify: true
     )
 
-    set figure.caption(
-        separator: [ --- ]
-    )
-
     // Писать только номер у ссылок
     set ref(supplement: it => [])
 

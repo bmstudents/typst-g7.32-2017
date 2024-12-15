@@ -13,5 +13,7 @@
 
     set table.cell(breakable: false)
 
+    set table(inset: config.figure.inset)
+
     content
 }
