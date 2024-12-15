@@ -21,8 +21,15 @@
     }
 
     show figure: it => {
+        show figure.caption: it => {
+            set par(justify: false, leading: 0.65em)
+            set text(size: config.page.textSize)
+            it
+        }
+
         it
         hide()[
+            #v(-24pt)
             #par[empty]
         ]
     }

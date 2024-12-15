@@ -4,3 +4,4 @@
 #import "toc.typ": *
 #import "figure.typ": *
 #import "raw.typ": *
+#import "table.typ": *
