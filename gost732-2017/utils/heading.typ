@@ -41,10 +41,10 @@
 ]
 #let заключение = conslusion
 
-#let sources_list = [
-    = Список использованных источников
+#let bibliography_heading = [
+    = СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ
 ]
-#let список_использованных_источников = sources_list
+#let список_использованных_источников_заголовок = bibliography_heading
 
 #let appendix(n: (), number: ()) = {
     if n != () { number = n }

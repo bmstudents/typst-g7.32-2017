@@ -3,7 +3,7 @@
         inset: 10pt,
     ),
     raw:(
-        font: "Courier",
+        font: "Courier New",
         size: 12pt,
     ),
     toc:(

@@ -1,5 +1,5 @@
 #import "../g7.32-2017.config.typ": config
-#import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading
+#import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, is_appendix
 
 #let style_heading(content) = {
     // Счетчик для отсчета первого заголовка
@@ -24,10 +24,13 @@
     
     show heading.where(level:1): it => {
         let numbering_info = it.numbering
+        let outlined = it.outlined
         // Почему-то стили корректно применяются только при использовании переводе заголовка в текст
         it = to_str(it)
 
-        if config.heading.l1.pagebreak { try_pagebreak() }
+        if outlined and config.heading.l1.pagebreak { 
+            try_pagebreak()
+        }
 
         set text(config.heading.l1.size, weight: config.heading.l1.weight, hyphenate: false)
 
@@ -65,7 +68,7 @@
             not disable_numbering and
             not should_be_unnumbered_heading(it)
         ) { 
-            it = [ #h(config.page.parIndent) #heading_number ] + it       
+            it = [ #if outlined { h(config.page.parIndent) } #heading_number ] + it    
         } else {
             it = upper()[ #align(center)[ #it ]]
             // Сброс счетчика для корректного определения вида подзаголовков1

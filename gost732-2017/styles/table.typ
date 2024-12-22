@@ -11,7 +11,7 @@
         it
     }
 
-    set table.cell(breakable: false)
+    set table.cell(breakable: true)
 
     set table(inset: config.figure.inset)
 

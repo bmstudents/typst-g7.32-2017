@@ -1,4 +1,5 @@
 #import "../g7.32-2017.config.typ": config
+#import "../utils/heading.typ": список_использованных_источников_заголовок
 
 #let style_page(content) = {
     let page_numbering(content) = {
@@ -32,6 +33,20 @@
 
     // Писать только номер у ссылок
     set ref(supplement: it => [])
+
+    set bibliography(
+        title: none,
+        style: "gost-r-705-2008-numeric",
+        full: true
+    )
+
+    set heading(numbering: "1")
+
+    show bibliography: it => {
+        список_использованных_источников_заголовок
+        set par(justify: true)
+        it
+    }
 
     content
 }
