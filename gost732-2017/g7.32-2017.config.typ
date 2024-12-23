@@ -29,7 +29,7 @@
             pagebreak: true,
             weight:"bold",
             size: 14pt,
-            indent: 1em
+            indent: 1.5em
         ),
         l2: (
             pagebreak: false,
@@ -37,7 +37,7 @@
             size: 14pt,
             upper: false,
             align: left,
-            indent: 1em
+            indent: 1.5em
         ),
         l3: (
             pagebreak: false,
@@ -45,7 +45,7 @@
             size: 14pt,
             upper: false,
             align: left,
-            indent: 1em
+            indent: 1.5em
         ),
         l4: (
             pagebreak: false,
@@ -53,7 +53,7 @@
             size: 14pt,
             upper: false,
             align: left,
-            indent: 1em
+            indent: 1.5em
         ),
     )
 )

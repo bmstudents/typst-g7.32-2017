@@ -20,7 +20,12 @@
         margin: config.page.margin,
     )
 
-    set text(font: config.page.font, size: config.page.textSize, lang: "ru")
+    set text(
+        font: config.page.font, 
+        size: config.page.textSize, 
+        lang: "ru",
+        costs: (hyphenation: 1000%)
+    )
     
     set align(top)
 

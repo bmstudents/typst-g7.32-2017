@@ -28,6 +28,7 @@
 
 #let terms_abbreviations_designations(content) = [
     = Определения, обозначения и сокращения
+    #h(0.5em)
     #set par(first-line-indent: 0em)
     #content
 ]
