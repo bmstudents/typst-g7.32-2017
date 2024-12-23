@@ -2,9 +2,6 @@
 #import "utils/utils.typ": *
 #import "g7.32-2017.config.typ": *
 
-#let да = true
-#let нет = false
-
 #let gost732-2017(content) = {
     show: style_page;
     show: style_heading;

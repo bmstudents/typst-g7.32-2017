@@ -18,7 +18,7 @@
 
     let try_pagebreak() = {
         if heading_pagebreak.get().at(0) != 0 {
-            pagebreak()
+            pagebreak(weak: true)
         }
     }
     

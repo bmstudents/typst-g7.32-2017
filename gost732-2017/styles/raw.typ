@@ -4,9 +4,13 @@
     show raw: it => {
         set align(left)
         set text(font: config.raw.font, size: config.raw.size)
-        set par(leading: 0.65em)
+        set par(leading: 0.65em, justify: false)
+        set block(breakable: true)
 
-        it
+        table(
+            columns: (1fr),
+            [#it]
+        )
     }
 
     content

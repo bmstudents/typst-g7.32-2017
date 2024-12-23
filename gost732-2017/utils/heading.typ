@@ -1,3 +1,5 @@
+#import "../g7.32-2017.config.typ": config, по-умолчанию
+
 #let authors_list = [
     = Список исполнителей
 ]
@@ -46,35 +48,51 @@
 ]
 #let список_использованных_источников_заголовок = bibliography_heading
 
-#let appendix(n: (), number: ()) = {
-    if n != () { number = n }
-    if number == () { number = "" }
-    [= Приложение #number] // TODO: автоматические номера приложений
-}
-#let приложение(б: (), буква: ()) = appendix(n: б, number: буква)
-
-#let unnumbered_heading(content) = {
+#let unnumbered_heading(toc: none, content) = {
     // Грязный хак для прокидывания информации в функцию стиля
-    let disable_numbering(.., _) = ("disable_numbering": ())
+    let disable_numbering(.., _) = ("disable_numbering": (), "toc": toc)
 
     heading(
         level: 1, 
-        numbering: disable_numbering
+        numbering: disable_numbering,
+        outlined: toc != false
     )[
         #content
     ]
 }
-#let ненумерованный_заголовок(content) = unnumbered_heading(content)
+#let ненумерованный_заголовок(содержание: по-умолчанию, content) = unnumbered_heading(toc: содержание, content)
 
-#let numbered_heading(number: (), content) = {
+#let numbered_heading(number: (),  toc: none, content) = {
     // Грязный хак для прокидывания информации в функцию стиля
-    let force_numbering(.., _) = ("force_numbering": number)
+    let force_numbering(.., _) = ("force_numbering": number, "toc": toc)
 
     heading(
         level: 1,
         numbering: force_numbering,
+        outlined: toc != false
     )[
         #content
     ]
 }
-#let нумерованный_заголовок(номер: (), content) = numbered_heading(number: номер, content)
+#let нумерованный_заголовок(номер: (), содержание: по-умолчанию, content) = numbered_heading(number: номер, toc: содержание, content)
+
+
+#let appendix(l: none, toc: none, letter: none, content) = {
+    if l != none { letter = l }
+    if letter == none { letter = "" }
+
+    ненумерованный_заголовок(содержание: toc)[= Приложение #letter] // TODO: автоматические номера приложений
+
+    set heading(outlined: false)
+
+    let appendix_num(.., n) = [#letter.#n]
+
+    set figure(numbering: appendix_num)
+
+    context counter(figure.where(kind: table)).update(0)
+    context counter(figure.where(kind: raw)).update(0)
+    context counter(figure.where(kind: image)).update(0)
+
+    content
+}
+#let приложение(б: none, содержание: по-умолчанию, буква: none, content) = appendix(l: б, toc: содержание, letter: буква, content)

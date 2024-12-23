@@ -57,3 +57,7 @@
         ),
     )
 )
+
+#let да = true
+#let нет = false
+#let по-умолчанию = none

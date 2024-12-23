@@ -18,7 +18,16 @@
 #let should_be_unnumbered_heading(heading) = {
     let heading = lower(to_str(heading))
     let match_res = heading.match(regex(
-        "(список испольнителей)|реферат|содержание|(термины и определения)|(определения, обозначения и сокращения)|(перечень сокращений и обозначений)|введение|заключение|(список использованных источников)|(приложение [а-яё])"
+        "(список исполнителей)|реферат|содержание|(термины и определения)|(определения, обозначения и сокращения)|(перечень сокращений и обозначений)|введение|заключение|(список использованных источников)|(приложение [а-яё].*)"
+    ))
+
+    return match_res != none and match_res.start == 0 and match_res.end == heading.len()
+}
+
+#let should_be_ignored_heading(heading) = {
+    let heading = lower(to_str(heading))
+    let match_res = heading.match(regex(
+        "(список исполнителей)|реферат|содержание|(термины и определения)|(определения, обозначения и сокращения)|(перечень сокращений и обозначений)"
     ))
 
     return match_res != none and match_res.start == 0 and match_res.end == heading.len()
@@ -26,7 +35,7 @@
 
 #let is_appendix(heading) = {
     let heading = lower(to_str(heading))
-    let match_res = heading.match(regex("приложение [а-яё]"))
+    let match_res = heading.match(regex("приложение [а-яё].*"))
 
     return match_res != none and match_res.start == 0 and match_res.end == heading.len()
 }
