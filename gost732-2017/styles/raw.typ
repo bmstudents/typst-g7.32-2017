@@ -2,14 +2,16 @@
 
 #let style_raw(content) = {
     show raw: it => {
-        box(
-            fill: config.raw.bg,
-            inset: (x:6pt, y:0pt),
-            outset: (y:3pt),
-            radius: 4pt,
-            align(left)[#it]
+        set align(left)
+        set text(font: config.raw.font, size: config.raw.size)
+        set par(leading: 0.65em, justify: false)
+        set block(breakable: true)
+
+        table(
+            columns: (1fr),
+            [#it]
         )
     }
-    
+
     content
 }

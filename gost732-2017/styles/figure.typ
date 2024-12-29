@@ -2,23 +2,84 @@
 
 #let style_figure(content) = {
     show figure.where(
-      kind: table
+        kind: table
     ): it => {
-      set par(justify: false)
-      set figure.caption(position: top)
-      show figure.caption: set align(left)
+        set block(breakable: true)
+        set figure.caption(position: top)
+        show figure.caption: set align(left)
 
-      it
+        let continuation = counter("continuation")
+
+        v(-0.5em)
+        table(
+            stroke: 0em,
+            inset: (x: 0em, y: 0.5em),
+            columns: (1fr),
+            table.header([#align(left)[
+                #context if continuation.get().at(0) == 0 {[
+                    #continuation.update(1) 
+                    #it.caption
+                ]} else {[ 
+                    #set par(justify: false, leading: 0.65em)
+                    #set text(size: config.page.textSize)
+                    Продолжение таблицы #counter(figure.where(kind: table)).display()
+                ]}
+            ]]),
+            [#it.body]
+        )
+        v(-0.5em)
+
+        context continuation.update(0)
+    }
+
+    show figure.where(
+        kind: raw
+    ): it => {
+        set block(breakable: true)
+        set figure.caption(position: top)
+        show figure.caption: set align(left)
+
+        let continuation = counter("continuation")
+
+        v(-0.5em)
+        table(
+            stroke: 0em,
+            inset: (x: 0em, y: 0.5em),
+            columns: (1fr),
+            table.header([#align(left)[
+                #context if continuation.get().at(0) == 0 {[ 
+                    #continuation.update(1) 
+                    #it.caption
+                ]} else {[ 
+                    #set par(justify: false, leading: 0.65em)
+                    #set text(size: config.page.textSize)
+                    Продолжение листинга #counter(figure.where(kind: raw)).display()
+                ]}
+            ]]),
+            [#it.body]
+        )
+        v(-0.5em)
+
+        context continuation.update(0)
     }
 
     show figure: it => {
+        show figure.caption: it => {
+            set par(justify: false, leading: 0.65em)
+            set text(size: config.page.textSize)
+            it
+        }
+
         it
         hide()[
+            #v(-24pt)
             #par[empty]
         ]
     }
 
-    set table(inset: 10pt)
+    set figure.caption(
+        separator: [ --- ]
+    )
 
     content
 }

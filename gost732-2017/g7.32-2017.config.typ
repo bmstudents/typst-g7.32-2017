@@ -1,23 +1,14 @@
-#let img-counter = counter("image");
-
 #let config = (
+    figure:(
+        inset: 10pt,
+    ),
     raw:(
-        theme:"",
-        bg: luma(240),
-        num: false,
-        size: 14pt,
-        splitter: "|",
-        counter: counter("listing")
+        font: "Courier New",
+        size: 12pt,
     ),
     toc:(
         label: "Содержание",
         align: left
-    ),
-    img:(
-        counter: img-counter
-    ),
-    table:(
-        counter: counter("table")
     ),
     page:(
         textSize: 14pt,
@@ -38,7 +29,7 @@
             pagebreak: true,
             weight:"bold",
             size: 14pt,
-            indent: 1em
+            indent: 1.5em
         ),
         l2: (
             pagebreak: false,
@@ -46,7 +37,7 @@
             size: 14pt,
             upper: false,
             align: left,
-            indent: 1em
+            indent: 1.5em
         ),
         l3: (
             pagebreak: false,
@@ -54,7 +45,7 @@
             size: 14pt,
             upper: false,
             align: left,
-            indent: 1em
+            indent: 1.5em
         ),
         l4: (
             pagebreak: false,
@@ -62,7 +53,11 @@
             size: 14pt,
             upper: false,
             align: left,
-            indent: 1em
+            indent: 1.5em
         ),
     )
 )
+
+#let да = true
+#let нет = false
+#let по-умолчанию = none
