@@ -2,10 +2,6 @@
 #import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, is_appendix
 
 #let style_heading(content) = {
-    // Счетчик для отсчета первого заголовка
-    // Перед первым заголовком не должно быть разрывов страницы 
-    let heading_pagebreak = counter("heading_pagebreak")
-
     set heading(numbering: config.heading.numbering)
 
     let try_apply_number_subheading(subheading) = {
@@ -15,12 +11,6 @@
         }
         return subheading
     }
-
-    let try_pagebreak() = {
-        if heading_pagebreak.get().at(0) != 0 {
-            pagebreak(weak: true)
-        }
-    }
     
     show heading.where(level:1): it => {
         let numbering_info = it.numbering
@@ -29,7 +19,7 @@
         it = to_str(it)
 
         if outlined and config.heading.l1.pagebreak { 
-            try_pagebreak()
+            pagebreak(weak: true)
         }
 
         set text(config.heading.l1.size, weight: config.heading.l1.weight, hyphenate: false)
@@ -138,12 +128,6 @@
                 #it
             ]
         ]
-    }
-
-    show heading: it => {
-        it
-        // Счет количества заголовков
-        heading_pagebreak.step()
     }
 
     content
