@@ -81,7 +81,6 @@
 #let appendix(l: none, toc: none, letter: none, content) = {
     if l != none { letter = l }
     if letter == none { letter = "" }
-
     set heading(outlined: false)
 
     let appendix_num(.., n) = [#letter.#n]
