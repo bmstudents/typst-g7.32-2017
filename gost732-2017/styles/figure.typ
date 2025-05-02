@@ -19,8 +19,8 @@
                 #context if continuation.get().at(0) == 0 {[
                     #continuation.update(1) 
                     #it.caption
-                ]} else {[ 
-                    #set par(justify: false, leading: 0.65em)
+                ]} else {[
+                    #set par(justify: true, leading: 0.65em)
                     #set text(size: config.page.textSize)
                     Продолжение таблицы #counter(figure.where(kind: table)).display()
                 ]}
@@ -51,7 +51,7 @@
                     #continuation.update(1) 
                     #it.caption
                 ]} else {[ 
-                    #set par(justify: false, leading: 0.65em)
+                    #set par(justify: true, leading: 0.65em)
                     #set text(size: config.page.textSize)
                     Продолжение листинга #counter(figure.where(kind: raw)).display()
                 ]}
@@ -65,7 +65,7 @@
 
     show figure: it => {
         show figure.caption: it => {
-            set par(justify: false, leading: 0.65em)
+            set par(justify: true, leading: 0.65em)
             set text(size: config.page.textSize)
             it
         }

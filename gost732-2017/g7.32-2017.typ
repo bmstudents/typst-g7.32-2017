@@ -10,6 +10,7 @@
     show: style_figure;
     show: style_raw;
     show: style_table;
+    show: style_eq;
     content
 }
 

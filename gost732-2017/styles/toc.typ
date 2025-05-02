@@ -46,7 +46,7 @@
 
         let body = make_view(it)
 
-        [ #body #box(width: 1fr, fill) #page ]
+        link(element.location())[ #body #box(width: 1fr, fill) #page ]
     }
 
     content
