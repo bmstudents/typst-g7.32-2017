@@ -39,6 +39,20 @@
     // Писать только номер у ссылок
     set ref(supplement: it => [])
 
+    // https://typst.app/docs/reference/model/ref/
+    show ref: it => {
+        let eq = math.equation
+        let el = it.element
+        if el != none and el.func() == eq {
+            link(el.location(),numbering(
+            el.numbering,
+            ..counter(eq).at(el.location())
+            ))
+        } else {
+            it
+        }
+    }
+
     set bibliography(
         title: none,
         style: "gost-r-705-2008-numeric",
@@ -49,6 +63,8 @@
 
     show bibliography: it => {
         список_использованных_источников_заголовок
+        v(0.5em)
+
         set par(justify: true)
         it
     }

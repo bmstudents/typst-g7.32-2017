@@ -5,3 +5,4 @@
 #import "figure.typ": *
 #import "raw.typ": *
 #import "table.typ": *
+#import "eq.typ": *

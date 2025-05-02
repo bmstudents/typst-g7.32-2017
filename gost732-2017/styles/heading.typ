@@ -58,7 +58,7 @@
             not disable_numbering and
             not should_be_unnumbered_heading(it)
         ) { 
-            it = [ #if outlined { h(config.page.parIndent) } #heading_number ] + it    
+            it = [ #if outlined { h(config.page.parIndent) } #heading_number ] + it
         } else {
             it = upper()[ #align(center)[ #it ]]
             // Сброс счетчика для корректного определения вида подзаголовков1
@@ -70,10 +70,12 @@
         ]
     }
 
+    // show heading.where(level:1): set heading(numbering: none)
+
     show heading.where(level:2): it => {
         it = to_str(it)
 
-        if config.heading.l2.pagebreak { try_pagebreak() }
+        if config.heading.l2.pagebreak { pagebreak(weak: true) }
 
         set text(config.heading.l2.size, weight: config.heading.l2.weight, hyphenate: false)
 
@@ -93,7 +95,7 @@
     show heading.where(level:3): it => {
         it = to_str(it)
 
-        if config.heading.l3.pagebreak { try_pagebreak() }
+        if config.heading.l3.pagebreak { pagebreak(weak: true) }
         
         set text(config.heading.l3.size, weight: config.heading.l3.weight, hyphenate: false)
 
@@ -113,7 +115,7 @@
     show heading.where(level:4): it => {
         it = to_str(it)
 
-        if config.heading.l4.pagebreak { try_pagebreak() }
+        if config.heading.l4.pagebreak { pagebreak(weak: true) }
         
         set text(config.heading.l4.size, weight: config.heading.l4.weight, hyphenate: false)
 
