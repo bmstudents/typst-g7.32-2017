@@ -5,13 +5,14 @@
 #let table_of_contents() = {
     [
         #содержание_заголовок
-        #v(1em)
+        #v(2em)
 
         #set align(config.toc.align)
         #outline(
-            indent: auto,
+            indent: 1em,
             title: none,
         )
+        
     ]
 }
 

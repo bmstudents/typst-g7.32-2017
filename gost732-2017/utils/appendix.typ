@@ -22,23 +22,15 @@
         #let begin = str("internal-appendix-begin"+letter)
         #let end = str("internal-appendix-end"+letter)
 
+        #pagebreak(weak: true)
         #align(center)[
-            #ненумерованный_заголовок(содержание: [ ПРИЛОЖЕНИЕ #letter #toc])[ = Приложение #letter ]
-            #strong[ #upper[ #toc ] ]
-            \ Листов #context { 
-                let minus = -1 * int(counter(page).at(label(end)) != counter(page).final())
-                counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0) + minus
+            #ненумерованный_заголовок(содержание: [ ПРИЛОЖЕНИЕ #letter #toc ])[ Приложение #letter \ #strong[ #upper[ #toc ] ] ]
+            Листов #context {
+                counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0)
             }
         ] #label(begin)
 
-        #set page(
-            footer: [
-                #set text(size: config.page.textSize)
-                #set align(config.page.alignNum)
-                #context { counter(page).get().at(0) - counter(page).at(label(begin)).at(0) }
-            ]
-        )
-
+        #pagebreak(weak: true)
         #content
         #pagebreak(weak: true)
         #metadata("kostyl") #label(end)

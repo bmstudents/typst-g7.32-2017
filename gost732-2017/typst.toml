@@ -1,6 +1,6 @@
 [package]
 name = "gost732-2017"
-version = "0.3.0"
+version = "0.4.0"
 entrypoint = "g7.32-2017.typ"
 authors = [
     "vzalygin <https://github.com/vzalygin",
@@ -11,3 +11,4 @@ description = "Styles to format docs with GOST 7.32-2017"
 repository = "https://github.com/bmstudents-dev-group/typst-g7.32-2017"
 keywords = ["gost7.32-2017", "gost"]
 categories = ["text", "scripting"]
+compiler = "0.13.0"
