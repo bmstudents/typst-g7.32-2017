@@ -6,11 +6,23 @@
     set heading(numbering: config.heading.numbering, supplement: auto)
 
     // https://discord.com/channels/1054443721975922748/1088371919725793360/1367845473183993928
-    show heading.where(): set block(below: 3em) // Расстояние между заголовком и текстом
-    show heading.where(): it => {
+    show heading.where(level: 2): it => {
         v(1em, weak: true) // Расстояние между заголовками
-
-        it
+        block(below: 2.5em, sticky: true)[#par[ // Расстояние между заголовком и текстом
+            #counter(heading).display() #it.body 
+        ]]
+    }
+    show heading.where(level: 3): it => {
+        v(1em, weak: true) // Расстояние между заголовками
+        block(below: 2.5em, sticky: true)[#par[ // Расстояние между заголовком и текстом
+            #counter(heading).display() #it.body 
+        ]]
+    }
+    show heading.where(level: 4): it => {
+        v(1em, weak: true) // Расстояние между заголовками
+        block(below: 2.5em, sticky: true)[#par[ // Расстояние между заголовком и текстом
+            #counter(heading).display() #it.body 
+        ]]
     }
 
     show heading.where(level: 1): it => {
@@ -20,19 +32,25 @@
             colbreak(weak: true)
         }
 
-        if it.numbering == none {
+        if it.numbering == none or should_be_unnumbered_heading(it) {
             context counter(heading).update(0)
         }
 
         if should_be_unnumbered_heading(it) {
-            context counter(heading).update(0)
-            it = block[#it.body]
+            upper[#align(center)[
+                #v(1em, weak: true) // Расстояние между заголовками
+                #block(below: 2.5em, sticky: true)[#par[ // Расстояние между заголовком и текстом
+                    #it.body 
+                ]]
+            ]]
+        } else {
+            align(left)[
+                #v(1em, weak: true) // Расстояние между заголовками
+                #block(below: 2.5em, sticky: true)[#par[ // Расстояние между заголовком и текстом
+                    #counter(heading).display() #it.body 
+                ]]
+            ]
         }
-    
-        upper[#align(center)[
-            #it
-        ]]
-
     }
 
     show heading.where(level: 2): it => {

@@ -16,12 +16,12 @@
 }
 
 #let should_be_unnumbered_heading(heading) = {
-    let heading = lower(to_str(heading))
+    let heading = lower(to_str(heading.body))
     let match_res = heading.match(regex(
         "(список исполнителей)|реферат|содержание|(термины и определения)|(определения, обозначения и сокращения)|(перечень сокращений и обозначений)|введение|заключение|(список использованных источников)|(приложение [а-яё].*)"
     ))
 
-    return match_res != none and match_res.start == 0 and match_res.end == heading.len()
+    return match_res != none
 }
 
 #let should_be_ignored_heading(heading) = {

@@ -24,9 +24,13 @@
 
         #pagebreak(weak: true)
         #align(center)[
-            #ненумерованный_заголовок(содержание: [ ПРИЛОЖЕНИЕ #letter #toc ])[ Приложение #letter \ #strong[ #upper[ #toc ] ] ]
+            #ненумерованный_заголовок(содержание: [ ПРИЛОЖЕНИЕ #letter #toc ])[ 
+                Приложение #letter \
+                #strong[ #upper[ #toc ] ]
+            ]
             Листов #context {
-                counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0)
+                let minus = -1 * int(counter(page).at(label(end)) != counter(page).final())
+                counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0) + minus
             }
         ] #label(begin)
 
