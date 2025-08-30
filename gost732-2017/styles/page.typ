@@ -32,7 +32,7 @@
     set par(
         leading: config.page.spacing, 
         spacing: config.page.spacing, 
-        first-line-indent: config.page.parIndent,
+        first-line-indent: (amount: config.page.parIndent, all: true),
         justify: true
     )
 

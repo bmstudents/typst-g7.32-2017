@@ -50,29 +50,13 @@
 #let список_использованных_источников_заголовок = bibliography_heading
 
 #let unnumbered_heading(toc: none, content) = {
-    // Грязный хак для прокидывания информации в функцию стиля
-    let disable_numbering(.., _) = ("disable_numbering": (), "toc": toc)
-
     heading(
         level: 1, 
-        numbering: disable_numbering,
-        outlined: toc != false
+        numbering: none,
+        outlined: toc != false,
+        supplement: toc
     )[
         #content
     ]
 }
 #let ненумерованный_заголовок(содержание: по-умолчанию, content) = unnumbered_heading(toc: содержание, content)
-
-#let numbered_heading(number: (),  toc: none, content) = {
-    // Грязный хак для прокидывания информации в функцию стиля
-    let force_numbering(.., _) = ("force_numbering": number, "toc": toc)
-
-    heading(
-        level: 1,
-        numbering: force_numbering,
-        outlined: toc != false
-    )[
-        #content
-    ]
-}
-#let нумерованный_заголовок(номер: (), содержание: по-умолчанию, content) = numbered_heading(number: номер, toc: содержание, content)
