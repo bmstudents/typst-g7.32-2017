@@ -20,7 +20,7 @@
                     #continuation.update(1) 
                     #it.caption
                 ]} else {[
-                    #set par(justify: true, leading: 0.65em)
+                    #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
                     #set text(size: config.page.textSize)
                     Продолжение таблицы #counter(figure.where(kind: table)).display()
                 ]}
@@ -51,7 +51,7 @@
                     #continuation.update(1) 
                     #it.caption
                 ]} else {[ 
-                    #set par(justify: true, leading: 0.65em)
+                    #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
                     #set text(size: config.page.textSize)
                     Продолжение листинга #counter(figure.where(kind: raw)).display()
                 ]}

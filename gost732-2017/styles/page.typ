@@ -63,7 +63,6 @@
 
     show bibliography: it => {
         список_использованных_источников_заголовок
-        v(0.5em)
 
         set par(justify: true)
         it
