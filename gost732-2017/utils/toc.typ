@@ -5,7 +5,6 @@
 #let table_of_contents() = {
     [
         #содержание_заголовок
-        #v(2em)
 
         #set align(config.toc.align)
         #outline(

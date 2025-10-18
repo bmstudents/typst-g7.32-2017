@@ -8,7 +8,7 @@ authors = [
 ]
 license = "MIT"
 description = "Styles to format docs with GOST 7.32-2017"
-repository = "https://github.com/bmstudents-dev-group/typst-g7.32-2017"
+repository = "https://github.com/bmstudents/typst-g7.32-2017"
 keywords = ["gost7.32-2017", "gost"]
 categories = ["text", "scripting"]
 compiler = "0.13.0"

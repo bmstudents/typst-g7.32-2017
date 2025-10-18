@@ -5,7 +5,7 @@
     
     show outline.entry: it => {
         if should_be_ignored_heading(it.element) {
-            return v(-1.5 * config.page.textSize)
+            return []
         }
 
         link(
