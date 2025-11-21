@@ -16,14 +16,26 @@
             inset: (x: 0em, y: 0.5em),
             columns: (1fr),
             table.header([#align(left)[
-                #context if continuation.get().at(0) == 0 {[
-                    #continuation.update(1) 
-                    #it.caption
-                ]} else {[
-                    #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
-                    #set text(size: config.page.textSize)
-                    Продолжение таблицы #counter(figure.where(kind: table)).display()
-                ]}
+                #context [ 
+                    #let table-small-offset = query(selector(
+                        <gost732-2017-feature-table-head-small-spacing>
+                    ).before(here())).last().value
+                    #if continuation.get().at(0) == 0 {[
+                        #continuation.update(1) 
+                        #it.caption
+                        // Костыль, чтобы сделать межстрочный интервал 1, а не 1.5 при включенной фиче
+                        #if table-small-offset == true {
+                            v(-0.5em)
+                        }
+                    ]} else {[
+                        #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
+                        #set text(size: config.page.textSize)
+                        Продолжение таблицы #counter(figure.where(kind: table)).display()
+                        #if table-small-offset == true {
+                            v(-0.5em)
+                        }
+                    ]}
+                ]
             ]]),
             [#it.body]
         )
@@ -47,14 +59,25 @@
             inset: (x: 0em, y: 0.5em),
             columns: (1fr),
             table.header([#align(left)[
-                #context if continuation.get().at(0) == 0 {[ 
-                    #continuation.update(1) 
-                    #it.caption
-                ]} else {[ 
-                    #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
-                    #set text(size: config.page.textSize)
-                    Продолжение листинга #counter(figure.where(kind: raw)).display()
-                ]}
+                #context [
+                    #let table-small-offset = query(selector(
+                        <gost732-2017-feature-table-head-small-spacing>
+                    ).before(here())).last().value
+                    #if continuation.get().at(0) == 0 {[ 
+                        #continuation.update(1) 
+                        #it.caption
+                        #if table-small-offset == true {
+                            v(-0.5em)
+                        }
+                    ]} else {[ 
+                        #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
+                        #set text(size: config.page.textSize)
+                        Продолжение листинга #counter(figure.where(kind: raw)).display()
+                        #if table-small-offset == true {
+                            v(-0.5em)
+                        }
+                    ]}
+                ]
             ]]),
             [#it.body]
         )

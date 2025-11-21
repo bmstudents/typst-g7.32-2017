@@ -3,6 +3,11 @@
 
 #let style_toc(content) = {
     
+    show outline: it => {
+        it
+        context pagebreak(weak: true)
+    }
+
     show outline.entry: it => {
         if should_be_ignored_heading(it.element) {
             return []
