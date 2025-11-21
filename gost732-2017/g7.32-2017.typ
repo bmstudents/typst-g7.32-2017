@@ -14,7 +14,7 @@
 
     // feature flags with default values
     [
-        #metadata(true) <gost732-2017-feature-table-head-small-spacing>
+        #metadata(false) <gost732-2017-feature-table-head-small-spacing>
     ]
 
     content
