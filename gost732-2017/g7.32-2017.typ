@@ -11,6 +11,12 @@
     show: style_raw;
     show: style_table;
     show: style_eq;
+
+    // feature flags with default values
+    [
+        #metadata(true) <gost732-2017-feature-table-head-small-spacing>
+    ]
+
     content
 }
 

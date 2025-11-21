@@ -14,7 +14,7 @@
         set text(config.heading.l1.size, weight: config.heading.l1.weight, hyphenate: false)
 
         if it.outlined and config.heading.l1.pagebreak {
-            colbreak(weak: true)
+            pagebreak(weak: true)
         }
 
         if it.numbering == none or should_be_unnumbered_heading(it) {
@@ -33,7 +33,7 @@
         set text(config.heading.l2.size, weight: config.heading.l2.weight, hyphenate: false)
 
         if config.heading.l2.pagebreak {
-            colbreak(weak: true)
+            pagebreak(weak: true)
         }
 
         if config.heading.l2.upper {
@@ -49,7 +49,7 @@
         set text(config.heading.l3.size, weight: config.heading.l3.weight, hyphenate: false)
 
         if config.heading.l3.pagebreak {
-            colbreak(weak: true)
+            pagebreak(weak: true)
         }
 
         if config.heading.l3.upper {
@@ -65,7 +65,7 @@
         set text(config.heading.l4.size, weight: config.heading.l4.weight, hyphenate: false)
 
         if config.heading.l4.pagebreak {
-            colbreak(weak: true)
+            pagebreak(weak: true)
         }
 
         if config.heading.l4.upper {
