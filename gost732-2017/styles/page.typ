@@ -53,12 +53,6 @@
         }
     }
 
-    set bibliography(
-        title: none,
-        style: "gost-r-705-2008-numeric",
-        full: true
-    )
-
     set heading(numbering: "1")
 
     show bibliography: it => {

@@ -11,10 +11,13 @@
     show: style_raw;
     show: style_table;
     show: style_eq;
+    show: style_bib;
 
     // feature flags with default values
     [
         #metadata(false) <gost732-2017-feature-table-head-small-spacing>
+        #metadata(false) <gost732-2017-feature-custom-bibliography>
+        #metadata(". ") <gost732-2017-feature-custom-bibliography-number-delimiter>
     ]
 
     content
