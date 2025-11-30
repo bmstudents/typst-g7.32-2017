@@ -1,6 +1,6 @@
 [package]
 name = "gost732-2017"
-version = "0.4.1"
+version = "0.4.2"
 entrypoint = "g7.32-2017.typ"
 authors = [
     "vzalygin <https://github.com/vzalygin",
