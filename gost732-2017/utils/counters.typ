@@ -3,13 +3,7 @@
 #let колво-страниц = context {
     let appendix = query(<internal-appendix>)
 
-    if appendix.len() > 0 {
-        return counter(page).at(
-            appendix.first().location()
-        ).at(0) - 1
-    } else {
-        return counter(page).final().at(0)
-    }
+    return counter(page).final().at(0)
 }
 
 #let колво-рисунков = context {
@@ -25,7 +19,7 @@
         return counter(figure.where(
             kind: image
         )).final().at(0)
-    }    
+    }
 }
 
 #let колво-таблиц = context {
@@ -41,7 +35,7 @@
         return counter(figure.where(
             kind: table
         )).final().at(0)
-    }    
+    }
 }
 
 #let колво-источников = context {
@@ -50,5 +44,5 @@
 }
 
 #let колво-приложений = context {
-    return query(<internal-appendix>).len()   
+    return query(<internal-appendix>).len()
 }
