@@ -1,6 +1,20 @@
 #import "../g7.32-2017.config.typ": config
 
 #let style_figure(content) = {
+    show figure: it => {
+        show figure.caption: it => {
+            set par(justify: true, leading: 0.3em)
+            set text(size: config.page.textSize)
+            it
+        }
+
+        it
+        hide()[
+            #v(-24pt)
+            #par[empty]
+        ]
+    }
+
     show figure.where(
         kind: table
     ): it => {
@@ -84,20 +98,6 @@
         v(-0.5em)
 
         context continuation.update(0)
-    }
-
-    show figure: it => {
-        show figure.caption: it => {
-            set par(justify: true, leading: 0.65em)
-            set text(size: config.page.textSize)
-            it
-        }
-
-        it
-        hide()[
-            #v(-24pt)
-            #par[empty]
-        ]
     }
 
     set figure.caption(
