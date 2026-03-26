@@ -19,13 +19,13 @@
 
         if it.numbering == none or should_be_unnumbered_heading(it) {
             context counter(heading).update(0)
-            align(center)[#upper[
+            align(center)[#upper[#block(above: 1em, below: 1em, sticky: true)[
                 #it.body
-            ]]
+            ]]]
         } else {
-            align(left)[
+            align(left)[#block(above: 1em, below: 1em, sticky: true)[
                 #it
-            ]
+            ]]
         }
     }
 
@@ -40,9 +40,9 @@
             it = upper(it)
         }
 
-        align(config.heading.l2.align)[
+        align(config.heading.l2.align)[#block(above: 1em, below: 1em, sticky: true)[
             #it
-        ]
+        ]]
     }
 
     show heading.where(level: 3): it => {
@@ -56,9 +56,9 @@
             it = upper(it)
         }
 
-        align(config.heading.l3.align)[
+        align(config.heading.l3.align)[#block(above: 1em, below: 1em, sticky: true)[
             #it
-        ]
+        ]]
     }
 
     show heading.where(level: 4): it => {
@@ -72,9 +72,9 @@
             it = upper(it)
         }
 
-        align(config.heading.l4.align)[
+        align(config.heading.l4.align)[#block(above: 1em, below: 1em, sticky: true)[
             #it
-        ]
+        ]]
     }
 
     content
