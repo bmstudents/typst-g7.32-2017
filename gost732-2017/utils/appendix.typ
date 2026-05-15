@@ -30,11 +30,11 @@
             ]
             Листов #context {
                 let minus = -1 * int(counter(page).at(label(end)) != counter(page).final())
-                counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0) + minus
+                counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0) + minus + 1
             }
         ] #label(begin)
 
-        #pagebreak(weak: true)
+        // #pagebreak(weak: true)
         #content
         #pagebreak(weak: true)
         #metadata("kostyl") #label(end)
