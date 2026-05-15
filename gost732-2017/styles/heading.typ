@@ -2,12 +2,17 @@
 #import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, is_appendix
 
 #let style_heading(content) = {
+    let heading_block(body) = block(above: 1em, below: 1em, sticky: true, width: 100%)[
+        #set par(justify: true)
+        #body
+    ]
 
     set heading(numbering: config.heading.numbering, supplement: auto)
     show heading: set block(sticky: true)
 
     show heading: it => {
-        par[ #counter(heading).display() #it.body ]
+        set par(justify: true, first-line-indent: 0em)
+        [#h(config.page.parIndent)#counter(heading).display() #it.body]
     }
 
     show heading.where(level: 1): it => {
@@ -19,11 +24,11 @@
 
         if it.numbering == none or should_be_unnumbered_heading(it) {
             context counter(heading).update(0)
-            align(center)[#upper[#block(above: 1em, below: 1em, sticky: true)[
+            align(center)[#upper[#block(above: 1em, below: 1em, sticky: true, width: 100%)[
                 #it.body
             ]]]
         } else {
-            align(left)[#block(above: 1em, below: 1em, sticky: true)[
+            align(left)[#heading_block[
                 #it
             ]]
         }
@@ -40,7 +45,7 @@
             it = upper(it)
         }
 
-        align(config.heading.l2.align)[#block(above: 1em, below: 1em, sticky: true)[
+        align(config.heading.l2.align)[#heading_block[
             #it
         ]]
     }
@@ -56,7 +61,7 @@
             it = upper(it)
         }
 
-        align(config.heading.l3.align)[#block(above: 1em, below: 1em, sticky: true)[
+        align(config.heading.l3.align)[#heading_block[
             #it
         ]]
     }
@@ -72,7 +77,7 @@
             it = upper(it)
         }
 
-        align(config.heading.l4.align)[#block(above: 1em, below: 1em, sticky: true)[
+        align(config.heading.l4.align)[#heading_block[
             #it
         ]]
     }
