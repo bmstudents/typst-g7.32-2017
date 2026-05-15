@@ -1,11 +1,15 @@
 #import "../g7.32-2017.config.typ": config
 
 #let style_figure(content) = {
+    let caption_style(body) = block(width: 100%)[
+        #set par(justify: true, leading: 0.3em, first-line-indent: 0em)
+        #set text(size: config.page.textSize)
+        #body
+    ]
+
     show figure: it => {
         show figure.caption: it => {
-            set par(justify: true, leading: 0.3em)
-            set text(size: config.page.textSize)
-            it
+            caption_style(it)
         }
 
         it
@@ -20,7 +24,7 @@
     ): it => {
         set block(breakable: true)
         set figure.caption(position: top)
-        show figure.caption: set align(left)
+        show figure.caption: it => caption_style(it)
 
         let continuation = counter("continuation")
 
@@ -42,7 +46,7 @@
                             v(-0.5em)
                         }
                     ]} else {[
-                        #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
+                        #set par(justify: true, leading: 0.3em, first-line-indent: 0cm)
                         #set text(size: config.page.textSize)
                         Продолжение таблицы #counter(figure.where(kind: table)).display()
                         #if table-small-offset == true {
@@ -63,7 +67,7 @@
     ): it => {
         set block(breakable: true)
         set figure.caption(position: top)
-        show figure.caption: set align(left)
+        show figure.caption: it => caption_style(it)
 
         let continuation = counter("continuation")
 
@@ -84,7 +88,7 @@
                             v(-0.5em)
                         }
                     ]} else {[ 
-                        #set par(justify: true, leading: 0.65em, first-line-indent: 0cm)
+                        #set par(justify: true, leading: 0.3em, first-line-indent: 0cm)
                         #set text(size: config.page.textSize)
                         Продолжение листинга #counter(figure.where(kind: raw)).display()
                         #if table-small-offset == true {

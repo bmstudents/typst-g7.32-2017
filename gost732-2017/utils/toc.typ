@@ -8,7 +8,7 @@
 
         #set align(config.toc.align)
         #outline(
-            indent: 1em,
+            indent: 0em,
             title: none,
         )
         
