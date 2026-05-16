@@ -12,7 +12,7 @@
 
 // Имя изменено, чтобы различать заголовок и структурный элемент
 #let toc_heading = [
-    = Содержание 
+    = СОДЕРЖАНИЕ 
 ]
 #let содержание_заголовок = toc_heading
 
@@ -27,19 +27,19 @@
 #let перечень_сокращений_и_ссылок = abbreviations_and_designations
 
 #let terms_abbreviations_designations(content) = [
-    = Определения, обозначения и сокращения
+    = ОПРЕДЕЛЕНИЯ, ОБОЗНАЧЕНИЯ И СОКРАЩЕНИЯ
     #set par(first-line-indent: 0em)
     #content
 ]
 #let определения_обозначения_сокращения = terms_abbreviations_designations
 
 #let introduction = [
-    = Введение
+    = ВВЕДЕНИЕ
 ]
 #let введение = introduction
 
 #let conslusion = [
-    = Заключение
+    = ЗАКЛЮЧЕНИЕ
 ]
 #let заключение = conslusion
 
