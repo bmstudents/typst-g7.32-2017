@@ -28,7 +28,7 @@
 #let should_be_ignored_heading(heading) = {
     let heading = lower(to_str(heading)).trim()
     let match_res = heading.match(regex(
-        "^(аннотация|список исполнителей|реферат|содержание|термины и определения|определения, обозначения и сокращения|перечень сокращений и обозначений)$"
+        "^(аннотация|список исполнителей|реферат|содержание)$"
     ))
 
     return match_res != none
