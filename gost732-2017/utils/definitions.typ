@@ -36,6 +36,7 @@
 
     определения_обозначения_сокращения[
         #metadata(true) <internal-definitions-section-rendered>
+        #par(first-line-indent: 1.25cm)[ В настоящем отчете о ВКР применяют следующие сокращения и обозначения: ]
         #set par(first-line-indent: 0em)
 
         #for entry in sorted_definition_entries [

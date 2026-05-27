@@ -49,20 +49,27 @@
 #let список_использованных_источников_заголовок = bibliography_heading
 
 #let unnumbered_heading(toc: none, numbering: none, content) = {
-    let sup = content;
-    if type(toc) == type([]) {
-        sup = toc;
+    if toc == false {
+        align(center)[#block(above: 1em, below: 1em, sticky: true, width: 100%)[
+            #set par(first-line-indent: 0em)
+            #content
+        ]]
+    } else {
+        let sup = content;
+        if type(toc) == type([]) {
+            sup = toc;
+        }
+        if type(numbering) == int or type(numbering) == str {
+            numbering = (..n) => str(numbering);
+        }
+        heading(
+            level: 1, 
+            numbering: numbering,
+            outlined: toc != false,
+            supplement: sup
+        )[
+            #content
+        ]
     }
-    if type(numbering) == int or type(numbering) == str {
-        numbering = (..n) => str(numbering);
-    }
-    heading(
-        level: 1, 
-        numbering: numbering,
-        outlined: toc != false,
-        supplement: sup
-    )[
-        #content
-    ]
 }
 #let ненумерованный_заголовок(содержание: по-умолчанию, номер: по-умолчанию, content) = unnumbered_heading(toc: содержание, numbering: номер, content)

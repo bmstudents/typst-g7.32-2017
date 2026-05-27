@@ -49,22 +49,21 @@
         };
 
         let text = if should_be_unnumbered_heading(it.element) {
-            // it.indented(
-            //     none,
-            //     [ #upper[#text] #box(width: 1fr, it.fill) #it.page() ]
-            // )
-            // par(first-line-indent: 0cm, justify: true)[ #upper[#text] #box(width: 1fr, it.fill) #it.page() ]
-            upper[#text]
+            upper[ #text ]
         } else {
-            // it.indented(
-            //     [ #it.prefix() #h(-0.5em) ],
-            //     [ #text #box(width: 1fr, it.fill) #it.page() ]
-            // )
-            // par(first-line-indent: 0cm, justify: true)[ #it.prefix() #text #box(width: 1fr, it.fill) #it.page() ]
             [ #it.prefix() #text ]
         }
 
-        par(first-line-indent: 0cm, justify: true)[ #text #box(width: 1fr, it.fill) #it.page() ]
+        par(first-line-indent: 0em, justify: true)[ 
+            // #h(0.5em * calc.max(0, it.level - 1))
+            #if it.level > 1 {
+                "  "
+            }
+            #if it.level > 2 {
+                "  " * (it.level - 2)
+            }
+            #text #box(width: 1fr, it.fill) #it.page()
+        ]
     }
     
     content
