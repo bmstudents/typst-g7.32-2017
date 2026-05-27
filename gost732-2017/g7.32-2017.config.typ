@@ -17,10 +17,10 @@
         margin: (left: 30mm, right: 15mm, top: 20mm, bottom: 20mm),
         font: "Times New Roman",
         parIndent: 1.25cm,
-        spacing: 1em
+        spacing: 1.04em
     ),
     list: (
-        indent: 1em
+        indent: 1.04em
     ),
     heading: (
         numbering: "1.1",
