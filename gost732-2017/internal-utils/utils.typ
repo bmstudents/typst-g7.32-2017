@@ -25,6 +25,16 @@
     return match_res != none
 }
 
+#let should_be_upper_heading(heading) = {
+    let heading = lower(to_str(heading.body)).trim()
+
+    let match_res = heading.match(regex(
+        "^(аннотация|список исполнителей|реферат|содержание|термины и определения|определения, обозначения и сокращения|перечень сокращений и обозначений|введение|заключение|список использованных источников)$"
+    ))
+
+    return match_res != none
+}
+
 #let should_be_ignored_heading(heading) = {
     let heading = lower(to_str(heading)).trim()
     let match_res = heading.match(regex(

@@ -1,6 +1,6 @@
 #import "heading.typ": *
 
-#let appendix(l: none, toc: none, letter: none, first-page-content: none,  content) = {
+#let appendix(l: none, toc: none, letter: none, first-page-content: none, own-numbering: false, content) = {
     if l != none { letter = l }
     if letter == none { letter = "" }
     set heading(outlined: false)
@@ -27,7 +27,7 @@
             #ненумерованный_заголовок(содержание: [ ПРИЛОЖЕНИЕ #letter #toc ])[ 
                 Приложение #letter
             ]
-            #par[#strong[ #upper[ #toc ] ]]
+            #par[#strong[ #toc ]]
             #par[Листов #context {
                 let minus = -1 * int(counter(page).at(label(end)) != counter(page).final())
                 counter(page).at(label(end)).at(0) - counter(page).at(label(begin)).at(0) + minus
@@ -39,18 +39,25 @@
         }
 
         #pagebreak(weak: true)
+
         // Собственная нумерация
         #set page(
             footer: [
                 #set text(size: config.page.textSize)
                 #set align(config.page.alignNum)
-                #context { counter(page).get().at(0) - counter(page).at(label(begin)).at(0) }
+                #context[#if own-numbering {
+                    counter(page).get().at(0) - counter(page).at(label(begin)).at(0)
+                } else {
+                    counter(page).get().at(0)
+                }]
             ]
         )
+        
+
         #content
         #pagebreak(weak: true)
         #metadata("kostyl") #label(end)
     ]
 }
 
-#let приложение(б: none, содержание: none, буква: none, контент-первой-страницы: none, content) = appendix(l: б, toc: содержание, letter: буква, first-page-content: контент-первой-страницы, content)
+#let приложение(б: none, содержание: none, буква: none, контент-первой-страницы: none, собственная-нумерация: false, content) = appendix(l: б, toc: содержание, letter: буква, first-page-content: контент-первой-страницы, own-numbering: собственная-нумерация, content)
