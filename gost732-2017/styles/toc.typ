@@ -1,5 +1,5 @@
 ﻿#import "../g7.32-2017.config.typ": config
-#import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, should_be_ignored_heading
+#import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, should_be_upper_heading, should_be_ignored_heading
 
 #let style_toc(content) = {
     
@@ -49,9 +49,15 @@
         };
 
         let text = if should_be_unnumbered_heading(it.element) {
-            upper[ #text ]
+            text
         } else {
             [ #it.prefix() #text ]
+        }
+
+        let text = if should_be_upper_heading(it.element) {
+            upper[ #text ]
+        } else {
+            text
         }
 
         par(first-line-indent: 0em, justify: true)[ 
