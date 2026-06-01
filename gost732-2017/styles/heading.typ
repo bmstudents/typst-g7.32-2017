@@ -4,6 +4,12 @@
 #let style_heading(content) = {
     set heading(numbering: config.heading.numbering, supplement: auto)
 
+    let sticky_heading(body) = block(
+        sticky: true,
+        width: 100%,
+        below: config.page.spacing,
+    )[#body]
+
     show heading: it => {
         par(justify: true, first-line-indent: 0em)[#h(config.page.parIndent)#counter(heading).display() #it.body]
     }
@@ -17,12 +23,16 @@
 
         if it.numbering == none or should_be_unnumbered_heading(it) {
             context counter(heading).update(0)
-            align(center)[#upper[
-                #it.body
-            ]]
+            sticky_heading[
+                #align(center)[#upper[
+                    #it.body
+                ]]
+            ]
         } else {
-            align(left)[
-                #it
+            sticky_heading[
+                #align(left)[
+                    #it
+                ]
             ]
         }
     }
@@ -38,8 +48,10 @@
             it = upper(it)
         }
 
-        align(config.heading.l2.align)[
-            #it
+        sticky_heading[
+            #align(config.heading.l2.align)[
+                #it
+            ]
         ]
     }
 
@@ -54,8 +66,10 @@
             it = upper(it)
         }
 
-        align(config.heading.l3.align)[
-            #it
+        sticky_heading[
+            #align(config.heading.l3.align)[
+                #it
+            ]
         ]
     }
 
@@ -70,8 +84,10 @@
             it = upper(it)
         }
 
-        align(config.heading.l4.align)[
-            #it
+        sticky_heading[
+            #align(config.heading.l4.align)[
+                #it
+            ]
         ]
     }
 
