@@ -61,12 +61,12 @@
 
     set heading(numbering: "1")
 
-    show bibliography: it => {
-        список_использованных_источников_заголовок
+    show bibliography: it => [
+        #align(center)[#список_использованных_источников_заголовок]
 
-        set par(justify: true)
-        it
-    }
+        #set par(justify: true)
+        #it
+    ]
 
     content
 }
