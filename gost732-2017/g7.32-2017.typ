@@ -2,22 +2,28 @@
 #import "utils/utils.typ": *
 #import "g7.32-2017.config.typ": *
 
-#let gost732-2017(content) = {
+#let gost732-2017(
+    feature-table-small-spacing: false,
+    content
+) = {
     show: style_page;
     show: style_heading;
     show: style_list;
     show: style_toc;
-    show: style_figure;
+    show: style_figure.with(feature-table-small-spacing);
     show: style_raw;
     show: style_table;
     show: style_eq;
 
     // feature flags with default values
     [
-        #metadata(false) <gost732-2017-feature-table-head-small-spacing>
+        // #metadata(false) <gost732-2017-feature-table-head-small-spacing>
     ]
 
     content
 }
 
-#let гост732-2017(content) = gost732-2017(content)
+#let гост732-2017(
+    фича-маленький-отступ-вокруг-таблиц: нет,
+    content
+) = gost732-2017(feature-table-small-spacing: фича-маленький-отступ-вокруг-таблиц, content)

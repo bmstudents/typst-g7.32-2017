@@ -5,7 +5,7 @@
     if letter == none { letter = "" }
     set heading(outlined: false)
 
-    let appendix_num(.., n) = [#letter.#n]
+    let appendix_num(.., n) = [ #if own-numbering == false [ #letter.#n ] else { n } ]
 
     set figure(numbering: appendix_num)
 
