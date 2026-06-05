@@ -2,13 +2,11 @@
 
 #let style_figure(feature-table-small-spacing, content) = {
     let caption_style(body) = [
-        #set text(size: config.page.textSize)
         #set par(justify: true, leading: 0.3em, first-line-indent: 0em)
         #body
     ]
 
     let caption_block_style(body) = box(width: 100%)[
-        #set text(size: config.page.textSize)
         #set par(justify: true, leading: 0.3em, first-line-indent: 0em)
         #body
     ]
