@@ -7,11 +7,18 @@
     let sticky_heading(body) = block(
         sticky: true,
         width: 100%,
-        below: config.page.spacing,
+        spacing: 1em,
     )[#body]
 
     show heading: it => {
-        par(justify: true, first-line-indent: 0em)[#h(config.page.parIndent)#counter(heading).display() #it.body]
+        sticky_heading[#par(
+            leading: config.page.spacing, 
+            spacing: config.page.spacing,
+            first-line-indent: (amount: config.page.parIndent, all: true),
+            justify: true
+        )[
+            #counter(heading).display() #it.body
+        ]]
     }
 
     show heading.where(level: 1): it => {
@@ -23,16 +30,12 @@
 
         if it.numbering == none or should_be_unnumbered_heading(it) {
             context counter(heading).update(0)
-            sticky_heading[
-                #align(center)[#upper[
-                    #it.body
-                ]]
-            ]
+            align(center)[#upper[
+                #it.body
+            ]]
         } else {
-            sticky_heading[
-                #align(left)[
-                    #it
-                ]
+            align(left)[
+                #it
             ]
         }
     }
@@ -48,10 +51,8 @@
             it = upper(it)
         }
 
-        sticky_heading[
-            #align(config.heading.l2.align)[
-                #it
-            ]
+        align(config.heading.l2.align)[
+            #it
         ]
     }
 
@@ -66,10 +67,8 @@
             it = upper(it)
         }
 
-        sticky_heading[
-            #align(config.heading.l3.align)[
-                #it
-            ]
+        align(config.heading.l3.align)[
+            #it
         ]
     }
 
@@ -84,10 +83,8 @@
             it = upper(it)
         }
 
-        sticky_heading[
-            #align(config.heading.l4.align)[
-                #it
-            ]
+        align(config.heading.l4.align)[
+            #it
         ]
     }
 

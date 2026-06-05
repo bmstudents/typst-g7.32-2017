@@ -1,40 +1,20 @@
-#import "../g7.32-2017.config.typ": config
+#import "../g7.32-2017.config.typ": *
 
 #let style_figure(feature-table-small-spacing, content) = {
     let caption_style(body) = [
-        #set text(size: config.page.textSize)
-        #set par(justify: true, leading: 0.3em, first-line-indent: 0em)
-        #body
-    ]
-
-    let caption_block_style(body) = box(width: 100%)[
-        #set text(size: config.page.textSize)
-        #set par(justify: true, leading: 0.3em, first-line-indent: 0em)
-        #body
+        #set par(justify: true, leading: 0.5em, first-line-indent: 0em)
+        #box(width: 100%)[#body]
     ]
 
     let caption_text(caption) = [
         #caption.supplement #caption.counter.display(caption.numbering)#caption.separator #caption.body
     ]
 
-    show figure: it => {
-        show figure.caption: it => {
-            caption_style(it)
-        }
-
-        it
-        hide()[
-            #v(-24pt)
-            #par[empty]
-        ]
-    }
-
     show figure.where(
         kind: table
     ): it => {
         set block(breakable: true)
         set figure.caption(position: top)
-        show figure.caption: it => caption_style(it)
 
         let continuation = counter("continuation")
 
@@ -45,26 +25,20 @@
             columns: (1fr),
             table.header([#align(left)[
                 #context [
-                    #if continuation.get().at(0) == 0 {[
-                        #continuation.update(1) 
-                        #caption_block_style(caption_text(it.caption))
-                        // Костыль, чтобы сделать межстрочный интервал 1, а не 1.5 при включенной фиче
-                        #if feature-table-small-spacing == true {
-                            v(-0.5em)
-                        }
-                    ]} else {[
-                        #caption_block_style[
-                            Продолжение таблицы #counter(figure.where(kind: table)).display()
-                        ]
-                        #if feature-table-small-spacing == true {
-                            v(-0.5em)
-                        }
-                    ]}
+                    #if continuation.get().at(0) == 0 [
+                        #h(-1.25cm) #continuation.update(1) 
+                        #caption_text(it.caption)
+                        #v(if feature-table-small-spacing { -0.5em } else { 0em })
+                    ] else [ 
+                        #h(-1.25cm) Продолжение таблицы #counter(figure.where(kind: raw)).display()
+                        #v(if feature-table-small-spacing { -0.5em } else { 0em })
+                    ]
                 ]
             ]]),
             [#it.body]
         )
         v(-0.5em)
+        v(if feature-table-small-spacing { -0.5em } else { 0em })
 
         context continuation.update(0)
     }
@@ -74,7 +48,6 @@
     ): it => {
         set block(breakable: true)
         set figure.caption(position: top)
-        show figure.caption: it => caption_style(it)
 
         let continuation = counter("continuation")
 
@@ -85,27 +58,26 @@
             columns: (1fr),
             table.header([#align(left)[
                 #context [
-                    #if continuation.get().at(0) == 0 {[ 
-                        #continuation.update(1) 
-                        #caption_block_style(caption_text(it.caption))
-                        #if feature-table-small-spacing == true {
-                            v(-0.5em)
-                        }
-                    ]} else {[ 
-                        #caption_block_style[
-                            Продолжение листинга #counter(figure.where(kind: raw)).display()
-                        ]
-                        #if feature-table-small-spacing == true {
-                            v(-0.5em)
-                        }
-                    ]}
+                    #if continuation.get().at(0) == 0 [
+                        #h(-1.25cm) #continuation.update(1) 
+                        #caption_text(it.caption)
+                        #v(if feature-table-small-spacing { -0.5em } else { 0em })
+                    ] else [ 
+                        #h(-1.25cm) Продолжение листинга #counter(figure.where(kind: raw)).display()
+                        #v(if feature-table-small-spacing { -0.5em } else { 0em })
+                    ]
                 ]
             ]]),
             [#it.body]
         )
         v(-0.5em)
+        v(if feature-table-small-spacing { -0.5em } else { 0em })
 
         context continuation.update(0)
+    }
+
+    show figure.caption: it => {
+        caption_style(it)
     }
 
     set figure.caption(
