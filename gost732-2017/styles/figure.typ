@@ -30,7 +30,7 @@
                         #caption_text(it.caption)
                         #v(if feature-table-small-spacing { -0.5em } else { 0em })
                     ] else [ 
-                        #h(-1.25cm) Продолжение таблицы #counter(figure.where(kind: raw)).display()
+                        #h(-1.25cm) Продолжение таблицы #counter(figure.where(kind: table)).display()
                         #v(if feature-table-small-spacing { -0.5em } else { 0em })
                     ]
                 ]

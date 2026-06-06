@@ -60,15 +60,26 @@
             text
         }
 
-        par(first-line-indent: 0em, justify: true)[ 
-            // #h(0.5em * calc.max(0, it.level - 1))
-            #if it.level > 1 {
-                "  "
+
+        let indent_amount = if it.level > 1 {
+            1em * (it.level - 1)
+        } else {
+            0em
+        }
+
+        [
+            #context {
+                grid(
+                    columns: (indent_amount, 1fr),
+                    align: (left + bottom, right + bottom),
+                    if it.level > 1{
+                        "  "*(it.level - 1)
+                    }else{
+                        ""
+                    },
+                    box(width: 100%)[#set par(justify: true); #text #box(width: 1fr, it.fill) #it.page()],
+                )
             }
-            #if it.level > 2 {
-                "  " * (it.level - 2)
-            }
-            #text #box(width: 1fr, it.fill) #it.page()
         ]
     }
     
