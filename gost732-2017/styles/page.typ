@@ -1,5 +1,6 @@
 #import "../g7.32-2017.config.typ": config
 #import "../utils/heading.typ": список_использованных_источников_заголовок
+#import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, is_appendix
 
 #let style_page(content) = {
     let page_numbering(content) = {
@@ -41,16 +42,21 @@
 
     // https://typst.app/docs/reference/model/ref/
     show ref: it => {
-        let eq = math.equation
         let el = it.element
-        if el != none and el.func() == eq {
-            link(el.location(),numbering(
-            el.numbering,
-            ..counter(eq).at(el.location())
-            ))
-        } else {
-            it
+
+        if el != none and el.func() == math.equation {
+            return link(
+                el.location(),
+                numbering(el.numbering, ..counter(math.equation).at(el.location()))
+            )
         }
+
+        if el != none and el.func() == figure {
+            let target = query(it.target).first()
+            return numbering("1", ..counter(figure.where(kind: target.kind)).at(target.location()))
+        }
+
+        return it
     }
 
     set bibliography(
