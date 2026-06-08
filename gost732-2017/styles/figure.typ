@@ -80,6 +80,14 @@
         caption_style(it)
     }
 
+    show figure.where(
+        kind: image
+    ): it => {
+        it.body
+        v(if feature-table-small-spacing { -0.5em } else { 0em })
+        it.caption
+    }
+
     set figure.caption(
         separator: [ -- ]
     )

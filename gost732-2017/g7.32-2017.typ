@@ -4,9 +4,10 @@
 
 #let gost732-2017(
     feature-table-small-spacing: false,
+    feature-text-hyphenate: true,
     content
 ) = {
-    show: style_page;
+    show: style_page.with(feature-text-hyphenate);
     show: style_heading;
     show: style_list;
     show: style_toc;
@@ -15,15 +16,15 @@
     show: style_table;
     show: style_eq;
 
-    // feature flags with default values
-    [
-        // #metadata(false) <gost732-2017-feature-table-head-small-spacing>
-    ]
-
     content
 }
 
 #let гост732-2017(
     фича-маленький-отступ-вокруг-таблиц: нет,
+    фича-переносы-слов: да,
     content
-) = gost732-2017(feature-table-small-spacing: фича-маленький-отступ-вокруг-таблиц, content)
+) = gost732-2017(
+    feature-table-small-spacing: фича-маленький-отступ-вокруг-таблиц,
+    feature-text-hyphenate: фича-переносы-слов,
+    content
+)
