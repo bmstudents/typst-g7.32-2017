@@ -2,7 +2,7 @@
 #import "../utils/heading.typ": список_использованных_источников_заголовок
 #import "../internal-utils/utils.typ": to_str, should_be_unnumbered_heading, is_appendix
 
-#let style_page(content) = {
+#let style_page(feature-text-hyphenate, content) = {
     let page_numbering(content) = {
         set page(
             footer: [
@@ -25,9 +25,10 @@
         font: config.page.font, 
         size: config.page.textSize, 
         lang: "ru",
-        costs: (hyphenation: 1000%)
+        costs: (hyphenation: 1000%),
+        hyphenate: feature-text-hyphenate,
     )
-    
+
     set align(top)
 
     set par(
