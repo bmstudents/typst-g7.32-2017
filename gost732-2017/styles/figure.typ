@@ -18,10 +18,14 @@
 
         let continuation = counter("continuation")
 
-        v(-0.5em)
+        // Верхний отступ перед таблицей задаётся weak-пробелом: на стыке
+        // страниц он схлопывается, поэтому таблица, перетёкшая на новую
+        // страницу, начинается ровно от верхнего поля (а не на 0.5em ниже).
+        // Сам header больше не несёт верхнего inset (top: 0em).
+        v(config.page.spacing, weak: true)
         table(
             stroke: 0em,
-            inset: (x: 0em, y: 0.5em),
+            inset: (x: 0em, top: 0em, bottom: 0.5em),
             columns: (1fr),
             table.header([#align(left)[
                 #context [
@@ -35,7 +39,10 @@
                     ]
                 ]
             ]]),
-            [#it.body]
+            // тело прижато влево с тем же сдвигом, что и подпись (h(-1.25cm)),
+            // чтобы левая граница таблицы стояла ровно под словом «Таблица»,
+            // а не центрировалась по полосе
+            [#h(-1.25cm)#align(left)[#it.body]]
         )
         v(-0.5em)
         v(if feature-table-small-spacing { -0.5em } else { 0em })
@@ -51,10 +58,14 @@
 
         let continuation = counter("continuation")
 
-        v(-0.5em)
+        // Верхний отступ перед таблицей задаётся weak-пробелом: на стыке
+        // страниц он схлопывается, поэтому таблица, перетёкшая на новую
+        // страницу, начинается ровно от верхнего поля (а не на 0.5em ниже).
+        // Сам header больше не несёт верхнего inset (top: 0em).
+        v(config.page.spacing, weak: true)
         table(
             stroke: 0em,
-            inset: (x: 0em, y: 0.5em),
+            inset: (x: 0em, top: 0em, bottom: 0.5em),
             columns: (1fr),
             table.header([#align(left)[
                 #context [
@@ -83,13 +94,18 @@
     show figure.where(
         kind: image
     ): it => {
-        it.body
-        v(if feature-table-small-spacing { -0.5em } else { 0em })
-        it.caption
+        // тело и подпись рисунка — единый неразрывный блок: на стыке страниц
+        // подпись «Рисунок N» не отрывается от рисунка (orphan-защита)
+        block(breakable: false)[
+            #it.body
+            #v(if feature-table-small-spacing { -0.5em } else { 0em })
+            #it.caption
+        ]
     }
 
     set figure.caption(
-        separator: [ -- ]
+        // длинное тире (—, U+2014) по ГОСТ, а не en-dash от smartquote «--»
+        separator: [ #"\u{2014}" ]
     )
 
     content

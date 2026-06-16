@@ -9,6 +9,13 @@
 
     set figure(numbering: appendix_num)
 
+    // формулы в приложении нумеруются в его пределах, с буквой: «(А.1)».
+    // (Сами формулы считаются counter(math.equation), не figure-счётчиком.)
+    set math.equation(numbering: (..n) => {
+        let k = n.pos().last()
+        if letter-in-figures { "(" + letter + "." + str(k) + ")" } else { "(" + str(k) + ")" }
+    })
+
     [
         #metadata("internal-appendix") <internal-appendix>
 
@@ -16,7 +23,7 @@
             counter(figure.where(kind: table)).update(0)
             counter(figure.where(kind: raw)).update(0)
             counter(figure.where(kind: image)).update(0)
-            counter(figure.where(kind: math.equation)).update(0)
+            counter(math.equation).update(0)
         }
 
         #let begin = str("internal-appendix-begin"+letter)
@@ -55,8 +62,11 @@
         
 
         #content
-        #pagebreak(weak: true)
+        // метка конца — ДО финального разрыва, чтобы она оставалась на
+        // последней странице ЭТОГО приложения и не протекала на следующее
+        // (иначе «Листов N» завышается у не-последнего приложения)
         #metadata("kostyl") #label(end)
+        #pagebreak(weak: true)
     ]
 }
 

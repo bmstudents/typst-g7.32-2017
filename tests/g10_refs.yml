@@ -1,0 +1,16 @@
+kuznetsov2021:
+  type: book
+  title: "Архитектура распределённых систем"
+  author: "Кузнецов, Владимир Андреевич"
+  date: 2021
+  publisher: "Техносфера"
+  location: "Москва"
+
+morozova2018:
+  type: article
+  title: "Анализ отказоустойчивости сетей"
+  author: "Морозова, Елена Викторовна"
+  date: 2018
+  parent:
+    type: periodical
+    title: "Информационные технологии"

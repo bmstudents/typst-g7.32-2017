@@ -4,7 +4,9 @@
 #let internal-definition-entry-prefix = "internal-definition-entry-"
 
 #let definition(ref_text, definition_text) = context {
-    let definition_key = lower(to_str(definition_text)).trim()
+    // ключ без lower(): дедуп схлопывает только полностью идентичный текст,
+    // а определения, различающиеся регистром, остаются разными записями
+    let definition_key = to_str(definition_text).trim()
     let definition_index = query(selector(<internal-definition-entry>).before(here())).filter(
         entry => entry.value.key == definition_key,
     ).len()
@@ -20,7 +22,9 @@
     let section_rendered = query(<internal-definitions-section-rendered>).len() > 0
 
     if section_rendered {
-        link(label(internal-definition-entry-prefix + definition_key + "-" + str(definition_index)), ref_text)
+        // все вхождения термина ссылаются на единственную (первую, index 0)
+        // запись в разделе — повторы в разделе схлопнуты
+        link(label(internal-definition-entry-prefix + definition_key + "-0"), ref_text)
     } else {
         ref_text
     }
@@ -28,10 +32,19 @@
 #let определение(текст_ссылки, текст_определения) = definition(текст_ссылки, текст_определения)
 
 #let definitions_designations_abbreviations_section() = context {
+    // повторный вызов раздела не дублирует label (иначе ошибка «label occurs
+    // multiple times»): метки ставит только первый вызов
+    let already = query(selector(<internal-definitions-section-rendered>).before(here())).len() > 0
     let definition_entries = query(<internal-definition-entry>)
 
-    let sorted_definition_entries = definition_entries.sorted(
-        key: entry => lower(to_str(entry.value.definition_text)).trim(),
+    // Дедупликация: один и тот же термин (повторный #определение с тем же
+    // ключом) рендерим в разделе один раз. Поле index в definition() уже
+    // считает порядковый номер повтора — у первого вхождения он равен 0.
+    let sorted_definition_entries = definition_entries.filter(
+        entry => entry.value.index == 0,
+    ).sorted(
+        // ё→е в ключе сортировки: иначе ё (U+0451) уезжает в конец алфавита
+        key: entry => lower(to_str(entry.value.definition_text)).trim().replace("ё", "е"),
     )
 
     определения_обозначения_сокращения[
@@ -44,7 +57,11 @@
 
         #for entry in sorted_definition_entries [
             #let definition_label = internal-definition-entry-prefix + entry.value.key + "-" + str(entry.value.index)
-            #par([#entry.value.definition_text]) #label(definition_label)
+            #if already {
+                par([#entry.value.definition_text])
+            } else {
+                [#par([#entry.value.definition_text]) #label(definition_label)]
+            }
         ]
     ]
 }
