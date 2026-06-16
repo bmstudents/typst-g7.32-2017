@@ -54,7 +54,10 @@
 
         if el != none and el.func() == figure {
             let target = query(it.target).first()
-            return numbering("1", ..counter(figure.where(kind: target.kind)).at(target.location()))
+            // используем собственный numbering цели (в приложении — «А.1»),
+            // а не жёсткий «1», иначе ссылка теряет букву приложения
+            let num = if target.numbering == none { "1" } else { target.numbering }
+            return numbering(num, ..counter(figure.where(kind: target.kind)).at(target.location()))
         }
 
         return it

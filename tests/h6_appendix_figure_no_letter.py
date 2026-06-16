@@ -18,19 +18,19 @@ c = h.Checks("h6_appendix_figure_no_letter")
 pdf = h.compile("h6_appendix_figure_no_letter.typ")
 norm = " ".join(h.text(pdf).split())
 
-# 1. подписи-заголовки: "Рисунок 1 –/-" и "Рисунок 2 –/-"
-cap1 = len(re.findall(r"Рисунок 1\s*[–-]", norm))
-cap2 = len(re.findall(r"Рисунок 2\s*[–-]", norm))
-c.check("caption1_once", cap1 == 1, f"подпись 'Рисунок 1 –' встречается {cap1} раз, ожидалось 1")
-c.check("caption2_once", cap2 == 1, f"подпись 'Рисунок 2 –' встречается {cap2} раз, ожидалось 1")
+# 1. подписи-заголовки: "Рисунок 1 —/-" и "Рисунок 2 —/-"
+cap1 = len(re.findall(r"Рисунок 1\s*[—-]", norm))
+cap2 = len(re.findall(r"Рисунок 2\s*[—-]", norm))
+c.check("caption1_once", cap1 == 1, f"подпись 'Рисунок 1 —' встречается {cap1} раз, ожидалось 1")
+c.check("caption2_once", cap2 == 1, f"подпись 'Рисунок 2 —' встречается {cap2} раз, ожидалось 1")
 
 # 2. буква приложения не попала в номер рисунка
 c.check("no_letter_in_number", "Рисунок Г." not in norm and "Рисунок Г " not in norm,
         f"буква 'Г' просочилась в номер рисунка при буква-в-иллюстрациях:нет:\n{norm[:300]}")
 
 # 3. соответствие номер↔тело подписи
-m1 = re.search(r"Рисунок 1\s*[–-]\s*(\S+)", norm)
-m2 = re.search(r"Рисунок 2\s*[–-]\s*(\S+)", norm)
+m1 = re.search(r"Рисунок 1\s*[—-]\s*(\S+)", norm)
+m2 = re.search(r"Рисунок 2\s*[—-]\s*(\S+)", norm)
 c.check("caption1_body", m1 is not None and m1.group(1).startswith("Схема-без-буквы"),
         f"тело подписи 1 не 'Схема-без-буквы': {m1.group(1) if m1 else None}")
 c.check("caption2_body", m2 is not None and m2.group(1).startswith("Вторая-без-буквы"),

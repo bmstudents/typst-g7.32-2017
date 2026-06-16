@@ -104,7 +104,8 @@
     }
 
     set figure.caption(
-        separator: [ -- ]
+        // длинное тире (—, U+2014) по ГОСТ, а не en-dash от smartquote «--»
+        separator: [ #"\u{2014}" ]
     )
 
     content

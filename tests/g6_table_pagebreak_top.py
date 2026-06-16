@@ -8,7 +8,7 @@ t = h.text(pdf)
 
 c.check("pushed_to_page2", h.page_count(pdf) >= 2,
         f"таблица не ушла на 2-ю страницу: {h.page_count(pdf)} стр.")
-c.check("caption_present", "Таблица 1 – Параметры на новой странице" in t,
+c.check("caption_present", "Таблица 1 — Параметры на новой странице" in t,
         f"нет подписи на новой странице в:\n{t}")
 
 fw = h.first_word(pdf, 2)

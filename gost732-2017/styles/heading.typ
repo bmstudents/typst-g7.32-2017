@@ -15,7 +15,7 @@
             leading: config.page.spacing, 
             spacing: config.page.spacing,
             first-line-indent: (amount: config.page.parIndent, all: true),
-            justify: true
+            justify: false
         )[
             #counter(heading).display() #it.body
         ]]

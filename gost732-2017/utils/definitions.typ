@@ -4,7 +4,9 @@
 #let internal-definition-entry-prefix = "internal-definition-entry-"
 
 #let definition(ref_text, definition_text) = context {
-    let definition_key = lower(to_str(definition_text)).trim()
+    // ключ без lower(): дедуп схлопывает только полностью идентичный текст,
+    // а определения, различающиеся регистром, остаются разными записями
+    let definition_key = to_str(definition_text).trim()
     let definition_index = query(selector(<internal-definition-entry>).before(here())).filter(
         entry => entry.value.key == definition_key,
     ).len()
@@ -38,7 +40,8 @@
     let sorted_definition_entries = definition_entries.filter(
         entry => entry.value.index == 0,
     ).sorted(
-        key: entry => lower(to_str(entry.value.definition_text)).trim(),
+        // ё→е в ключе сортировки: иначе ё (U+0451) уезжает в конец алфавита
+        key: entry => lower(to_str(entry.value.definition_text)).trim().replace("ё", "е"),
     )
 
     определения_обозначения_сокращения[
