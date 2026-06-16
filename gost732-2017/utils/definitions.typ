@@ -20,7 +20,9 @@
     let section_rendered = query(<internal-definitions-section-rendered>).len() > 0
 
     if section_rendered {
-        link(label(internal-definition-entry-prefix + definition_key + "-" + str(definition_index)), ref_text)
+        // все вхождения термина ссылаются на единственную (первую, index 0)
+        // запись в разделе — повторы в разделе схлопнуты
+        link(label(internal-definition-entry-prefix + definition_key + "-0"), ref_text)
     } else {
         ref_text
     }
@@ -30,7 +32,12 @@
 #let definitions_designations_abbreviations_section() = context {
     let definition_entries = query(<internal-definition-entry>)
 
-    let sorted_definition_entries = definition_entries.sorted(
+    // Дедупликация: один и тот же термин (повторный #определение с тем же
+    // ключом) рендерим в разделе один раз. Поле index в definition() уже
+    // считает порядковый номер повтора — у первого вхождения он равен 0.
+    let sorted_definition_entries = definition_entries.filter(
+        entry => entry.value.index == 0,
+    ).sorted(
         key: entry => lower(to_str(entry.value.definition_text)).trim(),
     )
 
