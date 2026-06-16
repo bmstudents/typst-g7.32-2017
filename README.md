@@ -46,8 +46,48 @@
 
 ## ■ Установка
 
-Пакет подключается из локального namespace Typst. Скопируйте каталог
-`gost732-2017/` в директорию пакетов:
+Пакет ставится в локальный namespace Typst `@docs`. Проще всего — скриптом.
+
+### Скриптом
+
+Из клона репозитория (ставит текущую версию из `typst.toml`):
+
+**Linux / macOS**
+```bash
+./install.sh
+```
+
+**Windows (PowerShell)**
+```powershell
+.\install.ps1
+```
+
+Без клона, прямо из апстрима (последний тег):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bmstudents/typst-g7.32-2017/main/install.sh | sh
+```
+```powershell
+irm https://raw.githubusercontent.com/bmstudents/typst-g7.32-2017/main/install.ps1 | iex
+```
+
+Скрипт сам определяет ОС и каталог пакетов Typst, а режим (локальная копия или
+`git clone`) — по тому, лежит ли рядом каталог пакета. Флаги:
+
+| Флаг | Назначение |
+|------|------------|
+| `--with-typst` / `-WithTypst` | доустановить бинарь typst 0.14.2 (иначе скрипт спросит, если версия не та) |
+| `--namespace <имя>` / `-Namespace <имя>` | namespace пакета, по умолчанию `docs` |
+| `--link` / `-Link` | симлинк вместо копии — правки пакета видны без переустановки |
+| `--no-typst` / `-NoTypst` | не трогать бинарь typst (для CI / `curl \| sh`) |
+| `--help` / `-Help` | справка |
+
+Версию можно задать аргументом: `./install.sh 0.5.2`. Каталог пакетов целиком
+переопределяется переменной `TYPST_PACKAGE_PATH`.
+
+### Вручную
+
+Скопируйте каталог `gost732-2017/` в директорию пакетов:
 
 **Linux**
 ```bash
@@ -66,9 +106,6 @@ cp -r gost732-2017/* "~/Library/Application Support/typst/packages/docs/gost732-
 mkdir "$env:APPDATA\typst\packages\docs\gost732-2017\0.5.2"
 cp gost732-2017\* "$env:APPDATA\typst\packages\docs\gost732-2017\0.5.2\"
 ```
-
-Либо используйте установщик из родственного пакета
-[typst-bmstu](https://github.com/bmstudents/typst-bmstu) (`install.sh` / `install.ps1`).
 
 ## ■ Быстрый старт
 
