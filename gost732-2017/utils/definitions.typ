@@ -32,6 +32,9 @@
 #let определение(текст_ссылки, текст_определения) = definition(текст_ссылки, текст_определения)
 
 #let definitions_designations_abbreviations_section() = context {
+    // повторный вызов раздела не дублирует label (иначе ошибка «label occurs
+    // multiple times»): метки ставит только первый вызов
+    let already = query(selector(<internal-definitions-section-rendered>).before(here())).len() > 0
     let definition_entries = query(<internal-definition-entry>)
 
     // Дедупликация: один и тот же термин (повторный #определение с тем же
@@ -54,7 +57,11 @@
 
         #for entry in sorted_definition_entries [
             #let definition_label = internal-definition-entry-prefix + entry.value.key + "-" + str(entry.value.index)
-            #par([#entry.value.definition_text]) #label(definition_label)
+            #if already {
+                par([#entry.value.definition_text])
+            } else {
+                [#par([#entry.value.definition_text]) #label(definition_label)]
+            }
         ]
     ]
 }
