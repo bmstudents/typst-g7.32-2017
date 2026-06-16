@@ -23,7 +23,7 @@ def main():
     checks_ok = checks_fail = 0
     failed = []
     # typst-компиляция через sshfs медленная — гоняем тесты параллельно
-    with ThreadPoolExecutor(max_workers=8) as ex:
+    with ThreadPoolExecutor(max_workers=16) as ex:
         results = list(ex.map(_run, files))
     for f, code, out in results:
         for line in out.splitlines():

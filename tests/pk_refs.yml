@@ -1,0 +1,16 @@
+petrov2020:
+  type: book
+  title: "Основы цифровой обработки сигналов"
+  author: "Петров, Сергей Иванович"
+  date: 2020
+  publisher: "Радио и связь"
+  location: "Москва"
+
+ivanova2019:
+  type: article
+  title: "Методы сжатия данных"
+  author: "Иванова, Мария Петровна"
+  date: 2019
+  parent:
+    type: periodical
+    title: "Вестник информатики"

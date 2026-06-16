@@ -1,0 +1,16 @@
+smirnov2020:
+  type: book
+  title: "Основы цифровой обработки сигналов"
+  author: "Смирнов, Алексей Петрович"
+  date: 2020
+  publisher: "Радио и связь"
+  location: "Москва"
+
+petrova2019:
+  type: article
+  title: "Методы анализа временных рядов"
+  author: "Петрова, Ирина Сергеевна"
+  date: 2019
+  parent:
+    type: periodical
+    title: "Вестник информатики"
