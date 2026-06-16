@@ -39,7 +39,10 @@
                     ]
                 ]
             ]]),
-            [#it.body]
+            // тело прижато влево с тем же сдвигом, что и подпись (h(-1.25cm)),
+            // чтобы левая граница таблицы стояла ровно под словом «Таблица»,
+            // а не центрировалась по полосе
+            [#h(-1.25cm)#align(left)[#it.body]]
         )
         v(-0.5em)
         v(if feature-table-small-spacing { -0.5em } else { 0em })
@@ -91,9 +94,13 @@
     show figure.where(
         kind: image
     ): it => {
-        it.body
-        v(if feature-table-small-spacing { -0.5em } else { 0em })
-        it.caption
+        // тело и подпись рисунка — единый неразрывный блок: на стыке страниц
+        // подпись «Рисунок N» не отрывается от рисунка (orphan-защита)
+        block(breakable: false)[
+            #it.body
+            #v(if feature-table-small-spacing { -0.5em } else { 0em })
+            #it.caption
+        ]
     }
 
     set figure.caption(
