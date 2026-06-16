@@ -3,13 +3,13 @@
 #let img(
     data,
     placement: none,
-    повёрнуто: false,
+    повернуто: false,
     content
 ) = {
-    // повёрнуто: альбомная иллюстрация (широкая схема, А1-плакат) —
+    // повернуто: альбомная иллюстрация (широкая схема, А1-плакат) —
     // тело поворачивается на 90°, подпись «Рисунок N» остаётся горизонтальной
     return figure(
-        if повёрнуто { rotate(-90deg, reflow: true, data) } else { data },
+        if повернуто { rotate(-90deg, reflow: true, data) } else { data },
         caption: content,
         gap: config.page.spacing,
         supplement: [Рисунок],
@@ -21,9 +21,9 @@
 #let рис(
     рисунок,
     расположение: none,
-    повёрнуто: false,
+    повернуто: false,
     content,
-) = img(рисунок, placement: расположение, повёрнуто: повёрнуто, content)
+) = img(рисунок, placement: расположение, повернуто: повернуто, content)
 
 #let размер(количество-строчек) = {
     return 14pt * количество-строчек - 3pt
