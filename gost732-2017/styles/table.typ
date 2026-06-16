@@ -15,5 +15,10 @@
 
     set table(inset: config.figure.inset)
 
+    // В таблицах перенос слов по слогам не применяется (ГОСТ): в узких
+    // ячейках он даёт «логи-ка», на что ругается TestVkr. Перенос в
+    // обычном тексте при этом сохраняется.
+    show table: set text(hyphenate: false)
+
     content
 }
