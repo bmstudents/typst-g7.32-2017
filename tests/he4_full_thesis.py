@@ -26,12 +26,12 @@ for sub in ["1.1 Обзор", "1.2 Постановка", "2.1 Аппаратн�
     c.check(f"sub_{sub.split()[0]}", sub in t, f"нет подраздела {sub!r}")
 
 # --- сквозные рисунки 1,2,3 (по одному в каждом разделе) ---
-figs = re.findall(r"Рисунок (\d+) –", t)
+figs = re.findall(r"Рисунок (\d+) —", t)
 c.check("figures_sequential", figs == ["1", "2", "3"],
         f"рисунки не сквозные 1,2,3: {figs}")
 
 # --- сквозные таблицы 1,2,3 ---
-tabs = re.findall(r"Таблица (\d+) –", t)
+tabs = re.findall(r"Таблица (\d+) —", t)
 c.check("tables_sequential", tabs == ["1", "2", "3"],
         f"таблицы не сквозные 1,2,3: {tabs}")
 

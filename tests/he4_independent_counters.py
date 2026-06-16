@@ -9,8 +9,8 @@ c = h.Checks("he4_independent_counters")
 pdf = h.compile("he4_independent_counters.typ")
 t = " ".join(h.text(pdf).split())
 
-figs = re.findall(r"Рисунок (\d+) –", t)
-tabs = re.findall(r"Таблица (\d+) –", t)
+figs = re.findall(r"Рисунок (\d+) —", t)
+tabs = re.findall(r"Таблица (\d+) —", t)
 # номера формул в самом тексте (не ссылки): три блочные формулы -> (1)(2)(3)
 c.check("fig_counter_independent", figs == ["1", "2", "3"],
         f"рисунки: {figs}, ожидалось 1,2,3 (счётчик не должен зависеть от таблиц/формул)")

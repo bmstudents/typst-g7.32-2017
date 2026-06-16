@@ -5,8 +5,8 @@ c = h.Checks("pg_fig_numbering_sequential")
 pdf = h.compile("pg_fig_numbering_sequential.typ")
 t = h.text(pdf)
 
-c.check("figure_1", "Рисунок 1 – Первая" in t, f"нет «Рисунок 1 – Первая» в:\n{t}")
-c.check("figure_2", "Рисунок 2 – Вторая" in t, f"нет «Рисунок 2 – Вторая» в:\n{t}")
+c.check("figure_1", "Рисунок 1 — Первая" in t, f"нет «Рисунок 1 — Первая» в:\n{t}")
+c.check("figure_2", "Рисунок 2 — Вторая" in t, f"нет «Рисунок 2 — Вторая» в:\n{t}")
 
 # Порядок: первая подпись «Рисунок» выше второй (Y растёт вниз).
 y1 = h.y_of(pdf, "Рисунок", nth=1)

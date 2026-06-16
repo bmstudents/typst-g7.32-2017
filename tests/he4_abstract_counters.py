@@ -21,8 +21,8 @@ abs_src = marker("ИСТ")
 abs_app = marker("ПРИЛ")
 
 # Фактические числа из тела документа
-actual_figs = len(re.findall(r"Рисунок \d+ –", t))
-actual_tabs = len(re.findall(r"Таблица \d+ –", t))
+actual_figs = len(re.findall(r"Рисунок \d+ —", t))
+actual_tabs = len(re.findall(r"Таблица \d+ —", t))
 actual_pages = h.page_count(pdf)
 # источники: пронумерованные записи в списке "N. Фамилия"
 actual_src = len(re.findall(r"\b(\d+)\. [А-ЯЁ][а-яё]+ [А-ЯЁ]\.", t))

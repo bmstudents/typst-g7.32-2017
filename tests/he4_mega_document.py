@@ -26,8 +26,8 @@ def marker(tag):
 abs_fig, abs_tab, abs_src, abs_app = (marker("РИС"), marker("ТАБ"),
                                       marker("ИСТ"), marker("ПРИЛ"))
 # фактические рисунки/таблицы тела = с числовой подписью (не буквенной)
-body_figs = re.findall(r"Рисунок (\d+) –", t)
-body_tabs = re.findall(r"Таблица (\d+) –", t)
+body_figs = re.findall(r"Рисунок (\d+) —", t)
+body_tabs = re.findall(r"Таблица (\d+) —", t)
 c.check("abstract_figs", abs_fig == len(body_figs) == 2,
         f"реферат рис={abs_fig}, тело={body_figs}")
 c.check("abstract_tabs", abs_tab == len(body_tabs) == 2,
@@ -44,7 +44,7 @@ body_part = t.rsplit("ЗАКЛЮЧЕНИЕ", 1)[0]
 eqs = [e for e in re.findall(r"\((\d+)\)", body_part) if e in ("1", "2")]
 c.check("body_eqs_seq", eqs == ["1", "2"],
         f"формулы тела не сквозные (1),(2): {eqs}")
-c.check("body_listing", "Листинг 1 – Главный цикл" in t, "листинг тела не Листинг 1")
+c.check("body_listing", "Листинг 1 — Главный цикл" in t, "листинг тела не Листинг 1")
 
 # --- приложения: буквенная нумерация ---
 c.check("appA_fig", "Рисунок А.1" in t, "нет Рисунок А.1")

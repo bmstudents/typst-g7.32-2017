@@ -16,7 +16,7 @@ c.check("compiles", h.page_count(pdf) >= 1, "нет страниц в резул
 c.check("supplement", "Рисунок 1" in t, f"нет «Рисунок 1» в:\n{t}")
 
 # Подпись повёрнутого рисунка читается горизонтально целиком.
-c.check("caption_horizontal", "Рисунок 1 – Альбомная" in t,
+c.check("caption_horizontal", "Рисунок 1 — Альбомная" in t,
         f"подпись повёрнутого рисунка не найдена в:\n{t}")
 
 c.done()

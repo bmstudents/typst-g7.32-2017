@@ -8,7 +8,7 @@ t = h.text(pdf)
 
 c.check("pushed_to_page2", h.page_count(pdf) >= 2,
         f"листинг не ушёл на 2-ю страницу: {h.page_count(pdf)} стр.")
-c.check("caption_present", "Листинг 1 – Листинг на новой странице" in t,
+c.check("caption_present", "Листинг 1 — Листинг на новой странице" in t,
         f"нет подписи листинга на новой странице в:\n{t}")
 
 fw = h.first_word(pdf, 2)

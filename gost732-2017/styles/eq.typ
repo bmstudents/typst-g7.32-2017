@@ -9,7 +9,7 @@
     show math.equation.where(block: true): it => [
         #block(
             above: 2.5em,
-            below: 1em
+            below: 2.5em
         )[ #it ]
     ]
 

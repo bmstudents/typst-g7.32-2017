@@ -23,7 +23,7 @@ c.check("continuation_is_current_number", conts == {"1"},
         f"продолжение подписано неверным номером: {conts}, ожидался идущий '1' (а не будущий '2')")
 
 # --- сквозная нумерация таблиц 1 затем 2 ---
-tabs = re.findall(r"Таблица (\d+) –", t)
+tabs = re.findall(r"Таблица (\d+) —", t)
 c.check("tables_sequential", tabs == ["1", "2"],
         f"таблицы не сквозные 1,2: {tabs}")
 
