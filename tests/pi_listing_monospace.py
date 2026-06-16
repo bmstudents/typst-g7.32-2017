@@ -28,7 +28,7 @@ else:
     c.check("equal_width", False, "нет строк для проверки")
 
 # Доп. подтверждение: pdffonts показывает моноширинный шрифт (Courier).
-fonts = subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout
+fonts = subprocess.run([h.PDFFONTS, pdf], capture_output=True, text=True).stdout
 c.check("courier_font", "Courier" in fonts,
         f"моноширинный шрифт Courier не встроен:\n{fonts}")
 c.done()

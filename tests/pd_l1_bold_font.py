@@ -10,7 +10,7 @@ import helpers as h
 c = h.Checks("pd_l1_bold_font")
 pdf = h.compile("pd_l1_bold_font.typ")
 
-fonts = subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout
+fonts = subprocess.run([h.PDFFONTS, pdf], capture_output=True, text=True).stdout
 low = fonts.lower()
 
 c.check("bold_font_embedded",

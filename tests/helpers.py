@@ -6,6 +6,7 @@
 """
 import os
 import re
+import shutil
 import subprocess
 
 TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,13 +15,51 @@ OUT = os.path.join(TESTS_DIR, ".out")
 os.makedirs(OUT, exist_ok=True)
 
 
+def _bin(name):
+    """Находит бинарь кроссплатформенно, не завися от среды запуска.
+
+    Порядок: явный оверрайд через env (TYPST_BIN / PDFTOTEXT_BIN) → PATH →
+    типичные локации для любой ОС (linux/macOS/cargo/snap/macports). Нужно,
+    тк неинтерактивный ssh не подхватывает пользовательский PATH (на macOS —
+    /opt/homebrew/bin, на linux — ~/.local/bin и т.п.)."""
+    env = os.environ.get(name.upper() + "_BIN")
+    if env and os.path.exists(env):
+        return env
+    p = shutil.which(name)
+    if p:
+        return p
+    home = os.path.expanduser("~")
+    exe = name + (".exe" if os.name == "nt" else "")
+    candidates = (
+        os.path.join(home, "bin"),
+        os.path.join(home, ".local", "bin"),
+        os.path.join(home, ".cargo", "bin"),
+        "/opt/homebrew/bin",   # macOS (Apple Silicon, brew)
+        "/usr/local/bin",      # macOS (Intel, brew) / linux
+        "/usr/bin", "/bin",
+        "/snap/bin",           # linux snap
+        "/opt/local/bin",      # macports
+    )
+    for d in candidates:
+        cand = os.path.join(d, exe)
+        if os.path.exists(cand):
+            return cand
+    return name
+
+
+TYPST = _bin("typst")
+PDFTOTEXT = _bin("pdftotext")
+PDFINFO = _bin("pdfinfo")
+PDFFONTS = _bin("pdffonts")
+
+
 def compile(typ_path):
     """Компилирует .typ в pdf нашей версией пакета. Бросает на ошибке."""
     typ_path = os.path.join(TESTS_DIR, typ_path) if not os.path.isabs(typ_path) else typ_path
     name = os.path.splitext(os.path.basename(typ_path))[0]
     pdf = os.path.join(OUT, name + ".pdf")
     r = subprocess.run(
-        ["typst", "compile", "--root", REPO, typ_path, pdf],
+        [TYPST, "compile", "--root", REPO, typ_path, pdf],
         capture_output=True, text=True,
     )
     if r.returncode != 0:
@@ -30,12 +69,12 @@ def compile(typ_path):
 
 def text(pdf):
     """Весь текстовый слой pdf одной строкой (с \\n)."""
-    return subprocess.run(["pdftotext", pdf, "-"], capture_output=True).stdout.decode("utf-8")
+    return subprocess.run([PDFTOTEXT, pdf, "-"], capture_output=True).stdout.decode("utf-8")
 
 
 def words(pdf):
     """Список слов с координатами: [(page, x0, y0, x1, y1, word), ...]."""
-    out = subprocess.run(["pdftotext", "-bbox", pdf, "-"], capture_output=True, text=True).stdout
+    out = subprocess.run([PDFTOTEXT, "-bbox", pdf, "-"], capture_output=True, text=True).stdout
     res = []
     for pi, p in enumerate(re.split(r"<page", out)[1:], 1):
         for x0, y0, x1, y1, w in re.findall(
@@ -46,7 +85,7 @@ def words(pdf):
 
 
 def page_count(pdf):
-    return len(re.split(r"<page", subprocess.run(["pdftotext", "-bbox", pdf, "-"],
+    return len(re.split(r"<page", subprocess.run([PDFTOTEXT, "-bbox", pdf, "-"],
                                                  capture_output=True, text=True).stdout)) - 1
 
 

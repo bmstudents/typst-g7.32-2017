@@ -14,7 +14,7 @@ c.check("top_margin",
         f"верх первого слова y={None if fw is None else round(fw[0],2)}, ждём ~56.25")
 
 # Шрифт основного текста — Times New Roman (через pdffonts).
-fonts = subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout
+fonts = subprocess.run([h.PDFFONTS, pdf], capture_output=True, text=True).stdout
 c.check("font_times",
         "TimesNewRoman" in fonts.replace(" ", ""),
         f"нет TimesNewRoman в шрифтах:\n{fonts}")

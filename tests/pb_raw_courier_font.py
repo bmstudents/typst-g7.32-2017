@@ -7,7 +7,7 @@ import helpers as h
 c = h.Checks("pb_raw_courier_font")
 pdf = h.compile("pb_raw_courier_font.typ")
 
-fonts = subprocess.run(["pdffonts", pdf], capture_output=True, text=True).stdout
+fonts = subprocess.run([h.PDFFONTS, pdf], capture_output=True, text=True).stdout
 flat = fonts.replace(" ", "")
 
 c.check("courier_present",
