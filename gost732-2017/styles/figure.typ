@@ -18,10 +18,14 @@
 
         let continuation = counter("continuation")
 
-        v(-0.5em)
+        // Верхний отступ перед таблицей задаётся weak-пробелом: на стыке
+        // страниц он схлопывается, поэтому таблица, перетёкшая на новую
+        // страницу, начинается ровно от верхнего поля (а не на 0.5em ниже).
+        // Сам header больше не несёт верхнего inset (top: 0em).
+        v(config.page.spacing, weak: true)
         table(
             stroke: 0em,
-            inset: (x: 0em, y: 0.5em),
+            inset: (x: 0em, top: 0em, bottom: 0.5em),
             columns: (1fr),
             table.header([#align(left)[
                 #context [
@@ -51,10 +55,14 @@
 
         let continuation = counter("continuation")
 
-        v(-0.5em)
+        // Верхний отступ перед таблицей задаётся weak-пробелом: на стыке
+        // страниц он схлопывается, поэтому таблица, перетёкшая на новую
+        // страницу, начинается ровно от верхнего поля (а не на 0.5em ниже).
+        // Сам header больше не несёт верхнего inset (top: 0em).
+        v(config.page.spacing, weak: true)
         table(
             stroke: 0em,
-            inset: (x: 0em, y: 0.5em),
+            inset: (x: 0em, top: 0em, bottom: 0.5em),
             columns: (1fr),
             table.header([#align(left)[
                 #context [
