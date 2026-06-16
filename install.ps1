@@ -48,10 +48,10 @@ function Warn($m) { Write-Host "  $CYel!$COff $m" }
 function Err($m)  { Write-Host "  $CRed✗$COff $m" }
 function Banner {
     Write-Host ""
-    Write-Host "  $CMauve┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓$COff"
+    Write-Host "  $CMauve┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓$COff"
     Write-Host "  $CMauve┃$COff  $CB${CMauve}gost732-2017$COff  $CDim· установка пакета$COff"
     Write-Host "  $CMauve┃$COff  ${CDim}стили оформления по ГОСТ 7.32-2017 для Typst$COff"
-    Write-Host "  $CMauve┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛$COff"
+    Write-Host "  $CMauve┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛$COff"
     Write-Host ""
 }
 

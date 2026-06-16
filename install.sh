@@ -50,12 +50,12 @@ err()  { printf '  %s✗%s %s\n' "$C_RED"   "$C_OFF" "$1" >&2; }
 
 banner() {
     printf '\n'
-    printf '  %s┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓%s\n' "$C_MAUVE" "$C_OFF"
+    printf '  %s┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓%s\n' "$C_MAUVE" "$C_OFF"
     printf '  %s┃%s  %s%sgost732-2017%s  %s· установка пакета%s\n' \
         "$C_MAUVE" "$C_OFF" "$C_B" "$C_MAUVE" "$C_OFF" "$C_DIM" "$C_OFF"
     printf '  %s┃%s  %sстили оформления по ГОСТ 7.32-2017 для Typst%s\n' \
         "$C_MAUVE" "$C_OFF" "$C_DIM" "$C_OFF"
-    printf '  %s┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛%s\n' "$C_MAUVE" "$C_OFF"
+    printf '  %s┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛%s\n' "$C_MAUVE" "$C_OFF"
     printf '\n'
 }
 
@@ -204,13 +204,15 @@ ensure_typst() {
         yes) install_typst ;;
         no)  warn "нужен typst $REQUIRED_TYPST (найдено: ${have:-нет}). Пропускаю (--no-typst)." ;;
         ask)
-            if [ -t 0 ]; then
-                printf '%sНужен typst %s (найдено: %s). Установить? [y/N] %s' \
-                    "$C_YEL" "$REQUIRED_TYPST" "${have:-нет}" "$C_OFF"
-                read -r ans
+            # читаем с управляющего терминала, а не из stdin — иначе при
+            # `curl … | sh` stdin занят скриптом и вопрос не задаётся.
+            if [ -e /dev/tty ]; then
+                printf '  %s?%s Нужен typst %s (найдено: %s). Установить? [y/N] ' \
+                    "$C_YEL" "$C_OFF" "$REQUIRED_TYPST" "${have:-нет}" > /dev/tty
+                IFS= read -r ans < /dev/tty || ans=""
                 case "$ans" in
                     [Yy]*) install_typst ;;
-                    *)     warn "пропускаю установку typst" ;;
+                    *)     warn "пропускаю установку typst (поставь сам или запусти с --with-typst)" ;;
                 esac
             else
                 warn "нужен typst $REQUIRED_TYPST (найдено: ${have:-нет}). Запусти с --with-typst или поставь вручную."
