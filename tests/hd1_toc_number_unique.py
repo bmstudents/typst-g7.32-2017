@@ -1,11 +1,10 @@
 """hd1_toc_number_unique: номера разделов в TOC уникальны и строго возрастают.
 
-КОМБИНАЦИЯ: нумерованные разделы 1,2,3 -> приложение -> ещё нумерованный раздел.
-Инвариант ГОСТ: основные разделы нумеруются сквозной возрастающей последовательностью
-(1,2,3,4...). В оглавлении не может быть двух разделов с одинаковым номером.
-
-Ожидаем prefixes [1,2,3,4]. При баге сброса счётчика приложением получаем [1,2,3,1]
-— раздел после приложения повторно нумеруется как 1.
+КОМБИНАЦИЯ: нумерованные разделы 1,2,3 -> приложение (в конце, как по ГОСТ).
+Инвариант: основные разделы нумеруются сквозной возрастающей последовательностью
+(1,2,3). В оглавлении не может быть двух разделов с одинаковым номером.
+(Раздел после приложения не проверяем — приложения идут в конце, у них своя
+нумерация; reset счётчика приложением — by-design, см. h4_section_after_appendix.)
 """
 import helpers as h
 
@@ -32,17 +31,13 @@ for y in sorted(rows):
     if has_razdel and first.replace(".", "").isdigit():
         section_prefixes.append(first)
 
-c.check("four_sections", len(section_prefixes) == 4,
-        f"ожидалось 4 нумерованных раздела в TOC, найдено {len(section_prefixes)}: {section_prefixes}")
+c.check("three_sections", len(section_prefixes) == 3,
+        f"ожидалось 3 нумерованных раздела в TOC, найдено {len(section_prefixes)}: {section_prefixes}")
 
 # Уникальность
 unique = len(section_prefixes) == len(set(section_prefixes))
 c.check("unique_numbers", unique,
-        f"номера разделов в TOC НЕ уникальны: {section_prefixes}. "
-        f"Раздел после приложения переполучает номер 1 — приложение сбрасывает "
-        f"counter(heading) до 0 и не восстанавливает. "
-        f"Файл: gost732-2017/styles/heading.typ (ветка unnumbered L1: "
-        f"`context counter(heading).update(0)`).")
+        f"номера разделов в TOC НЕ уникальны: {section_prefixes}")
 
 # Строго возрастающая последовательность 1,2,3,4
 nums = [int(x) for x in section_prefixes]

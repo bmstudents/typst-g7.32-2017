@@ -29,7 +29,15 @@
         }
 
         if it.numbering == none or should_be_unnumbered_heading(it) {
-            context counter(heading).update(0)
+            // ненумерованный заголовок не должен влиять на сквозную нумерацию
+            // разделов. Приложение обнуляет счётчик (своя нумерация); прочие
+            // структурные (ВВЕДЕНИЕ, ЗАКЛЮЧЕНИЕ…) лишь откатывают собственный
+            // авто-инкремент, чтобы не «съедать» и не сбрасывать номера.
+            if is_appendix(it.body) {
+                context counter(heading).update(0)
+            } else {
+                context counter(heading).update(n => calc.max(n - 1, 0))
+            }
             align(center)[#upper[
                 #it.body
             ]]
