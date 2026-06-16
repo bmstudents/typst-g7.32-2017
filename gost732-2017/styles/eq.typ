@@ -11,9 +11,6 @@
             above: 2.5em,
             below: 1em
         )[ #it ]
-        #par[
-            #hide[kostyl before typst 0.13.0]
-        ]
     ]
 
     content
