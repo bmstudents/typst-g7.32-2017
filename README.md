@@ -6,7 +6,7 @@
 
 **Стили оформления документов по ГОСТ 7.32-2017 для Typst**
 
-[![License](https://img.shields.io/github/license/bmstudents/typst-g7.32-2017?style=for-the-badge&color=2C2C2C&labelColor=1E1E1E)](https://github.com/bmstudents/typst-g7.32-2017/blob/main/LICENSE.md)
+[![License](https://img.shields.io/badge/license-MIT-2C2C2C?style=for-the-badge&labelColor=1E1E1E)](https://github.com/bmstudents/typst-g7.32-2017/blob/main/LICENSE.md)
 [![Version](https://img.shields.io/badge/версия-0.5.2-2C2C2C?style=for-the-badge&labelColor=1E1E1E)](https://github.com/bmstudents/typst-g7.32-2017/releases)
 [![Typst](https://img.shields.io/badge/typst-0.14.2-2C2C2C?style=for-the-badge&logo=typst&labelColor=1E1E1E)](https://typst.app)
 [![ГОСТ](https://img.shields.io/badge/ГОСТ-7.32--2017-2C2C2C?style=for-the-badge&labelColor=1E1E1E)](https://docs.cntd.ru/document/1200157208)
