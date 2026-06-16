@@ -29,19 +29,23 @@ for name, txt in expected.items():
         f"нет прописного заголовка '{txt}' в:\n  {norm[:200]}",
     )
 
-# Эти заголовки не должны нести номер раздела: между ними не должно
-# появиться нумерации вида '1 РЕФЕРАТ'. Проверяем, что слова-цифры,
-# идущие непосредственно перед заголовком, отсутствуют.
-words = [w[5] for w in h.words(pdf)]
-seq = " ".join(words)
-numbered = any(
-    f"{n} {txt.split()[0]}" in seq for n in ("1", "2", "3", "4", "5")
-    for txt in expected.values()
-)
+# Эти заголовки не должны нести номер раздела. Проверяем КООРДИНАТНО:
+# слева от первого слова заголовка на ТОЙ ЖЕ строке не должно быть числа
+# (плоский поиск ловил бы номер страницы из footer перед заголовком
+# следующей страницы — это не номер раздела).
+W = h.words(pdf)
+firsts = {txt.split()[0] for txt in expected.values()}
+numbered = False
+for w in W:
+    if w[5] in firsts:
+        left_same_line = [u for u in W if u[0] == w[0] and abs(u[2] - w[2]) < 3
+                          and u[3] <= w[1] and u[5].rstrip(".").isdigit()]
+        if left_same_line:
+            numbered = True
 c.check(
     "none_numbered",
     not numbered,
-    f"один из структурных заголовков получил номер раздела:\n  {seq[:200]}",
+    "один из структурных заголовков получил номер раздела (число слева на той же строке)",
 )
 
 c.done()
