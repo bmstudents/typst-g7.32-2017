@@ -1,0 +1,39 @@
+src1:
+  type: book
+  title: "Источник один"
+  author: "Антонов, А. А."
+  date: 2018
+  publisher: "Изд"
+  location: "Москва"
+
+src2:
+  type: book
+  title: "Источник два"
+  author: "Бубнов, Б. Б."
+  date: 2019
+  publisher: "Изд"
+  location: "Москва"
+
+src3:
+  type: book
+  title: "Источник три"
+  author: "Власов, В. В."
+  date: 2020
+  publisher: "Изд"
+  location: "Москва"
+
+src4:
+  type: book
+  title: "Источник четыре"
+  author: "Гусев, Г. Г."
+  date: 2021
+  publisher: "Изд"
+  location: "Москва"
+
+src5:
+  type: book
+  title: "Источник пять (забыли процитировать)"
+  author: "Денисов, Д. Д."
+  date: 2022
+  publisher: "Изд"
+  location: "Москва"

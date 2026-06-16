@@ -1,0 +1,15 @@
+aaa:
+  type: book
+  title: "Первый источник"
+  author: "Алексеев, Алексей Алексеевич"
+  date: 2020
+  publisher: "Издательство"
+  location: "Москва"
+
+bbb:
+  type: book
+  title: "Второй источник"
+  author: "Борисов, Борис Борисович"
+  date: 2021
+  publisher: "Издательство"
+  location: "Москва"

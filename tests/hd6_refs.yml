@@ -1,0 +1,85 @@
+src01:
+  type: book
+  title: "Основы теории алгоритмов"
+  author: "Иванов, Иван Иванович"
+  date: 2010
+  publisher: "Наука"
+  location: "Москва"
+src02:
+  type: book
+  title: "Сетевые протоколы"
+  author: "Петров, Пётр Петрович"
+  date: 2012
+  publisher: "БХВ"
+  location: "Санкт-Петербург"
+src03:
+  type: article
+  title: "Методы оптимизации"
+  author: "Сидоров, Сидор Сидорович"
+  date: 2015
+  parent:
+    type: periodical
+    title: "Вестник науки"
+src04:
+  type: book
+  title: "Базы данных"
+  author: "Кузнецов, Антон"
+  date: 2018
+  publisher: "Питер"
+  location: "Москва"
+src05:
+  type: book
+  title: "Машинное обучение"
+  author: "Смирнов, Олег"
+  date: 2019
+  publisher: "ДМК"
+  location: "Москва"
+src06:
+  type: book
+  title: "Криптография"
+  author: "Васильев, Никита"
+  date: 2020
+  publisher: "Лань"
+  location: "Москва"
+src07:
+  type: book
+  title: "Операционные системы"
+  author: "Николаев, Роман"
+  date: 2017
+  publisher: "Вильямс"
+  location: "Москва"
+src08:
+  type: book
+  title: "Компиляторы"
+  author: "Фёдоров, Артём"
+  date: 2016
+  publisher: "Техносфера"
+  location: "Москва"
+src09:
+  type: book
+  title: "Графика"
+  author: "Соколов, Денис"
+  date: 2014
+  publisher: "ДМК"
+  location: "Москва"
+src10:
+  type: book
+  title: "Параллельные вычисления"
+  author: "Морозов, Глеб"
+  date: 2021
+  publisher: "БХВ"
+  location: "Москва"
+src11:
+  type: book
+  title: "Квантовые алгоритмы"
+  author: "Зайцев, Илья"
+  date: 2022
+  publisher: "Наука"
+  location: "Москва"
+src12:
+  type: book
+  title: "Робототехника"
+  author: "Павлов, Егор"
+  date: 2023
+  publisher: "Лань"
+  location: "Москва"
